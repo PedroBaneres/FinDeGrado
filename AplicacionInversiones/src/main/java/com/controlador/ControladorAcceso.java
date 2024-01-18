@@ -58,15 +58,16 @@ public boolean  isImage1 = true;
     }
 
     @FXML
-    void switchImage(MouseEvent event) {
 
+    void switchImage(MouseEvent event) {
         if (isImage1) {
-            imagen.setImage(new Image("C:/Users/pbane/OneDrive/Escritorio/ComunicacionEntreVentanas/src/main/resources/imagenes/icono-usuario-2.jpg"));
+            imagen.setImage(new Image(getClass().getResource("/imagenes/icono-usuario.jpg").toExternalForm()));
         } else {
-            imagen.setImage(new Image("C:/Users/pbane/OneDrive/Escritorio/ComunicacionEntreVentanas/src/main/resources/imagenes/icono-usuario.jpg"));
+            imagen.setImage(new Image(getClass().getResource("/imagenes/icono-usuario-2.jpg").toExternalForm()));
         }
 
         isImage1 = !isImage1;
     }
+
 }
 
