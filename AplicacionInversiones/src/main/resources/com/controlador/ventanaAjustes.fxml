@@ -7,7 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.ControladorAjustes">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controlador.ControladorAjustes">
    <children>
       <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
       <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="MenuButton">

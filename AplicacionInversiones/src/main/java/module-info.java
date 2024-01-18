@@ -5,6 +5,6 @@ module com.example.comunicacionentreventanas {
     requires java.desktop;
 
 
-    opens com.example.controlador to javafx.fxml;
-    exports com.example.controlador;
+    opens com.controlador to javafx.fxml;
+    exports com.controlador;
 }

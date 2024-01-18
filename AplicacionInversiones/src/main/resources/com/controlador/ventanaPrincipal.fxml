@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controlador.ControladorPrincipal">
    <children>
       <VBox layoutX="65.0" layoutY="208.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="237.0" prefWidth="518.0" />
       <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />

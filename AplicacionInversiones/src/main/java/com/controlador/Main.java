@@ -1,4 +1,4 @@
-package com.example.controlador;
+package com.controlador;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/controlador/ventanaAcceso.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaAcceso.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -4,12 +4,12 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" style="-fx-background-color: lightgray; -fx-border-color: black;-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.ControladorAcceso">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" style="-fx-background-color: lightgray; -fx-border-color: black;-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controlador.ControladorAcceso">
    <children>
       <Button layoutX="158.0" layoutY="303.0" mnemonicParsing="false" onAction="#mostrarVentanaPrincipal" prefHeight="25.0" prefWidth="149.0" text="Acceder" />
       <ImageView fx:id="imagen" fitHeight="191.0" fitWidth="247.0" layoutX="137.0" layoutY="14.0" onMouseClicked="#switchImage" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../imagenes/icono-usuario.jpg" />
+            <Image url="@../../imagenes/icono-usuario.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="txtNombre" layoutX="158.0" layoutY="220.0" onAction="#mostrarVentanaPrincipal" />

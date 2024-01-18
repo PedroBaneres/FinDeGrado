@@ -1,0 +1,4 @@
+Al iniciar la aplicación nos encontramos con una ventana en la que se le pide al usuario escribir su nombre,
+si diese click a la imagen la cambiaría y una vez ha ingresado el nombre, si da click al botón de acceder o pulsa enter se
+abriria una nueva ventana en la que aparece la calculadora que realizamos en la práctica anterior, con un mensaje de bienvenida
+seguido del nombre que introdujimos en la primera ventana y otro botón para ir atras y volver a la primera ventana.

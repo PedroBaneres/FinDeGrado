@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" style="-fx-background-color: lightgray; -fx-border-color: black;-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.ControladorRegistro">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" style="-fx-background-color: lightgray; -fx-border-color: black;-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controlador.ControladorRegistro">
    <children>
       <Button layoutX="158.0" layoutY="324.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="25.0" prefWidth="149.0" text="Registrarse" />
       <Label layoutX="41.0" layoutY="67.0" text="Nombre:" />
