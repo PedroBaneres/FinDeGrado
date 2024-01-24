@@ -7,4 +7,6 @@ module com.example.comunicacionentreventanas {
 
     opens com.controlador to javafx.fxml;
     exports com.controlador;
+    exports com;
+    opens com to javafx.fxml;
 }
