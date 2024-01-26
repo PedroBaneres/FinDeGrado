@@ -1,4 +1,4 @@
-package com.controlador;
+package iesinfantaelena.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ControladorAcceso {
+public class LoginController {
 private  Stage stage;
 
 public boolean  isImage1 = true;
@@ -29,7 +29,7 @@ public boolean  isImage1 = true;
 
     @FXML
     void mostrarVentanaPrincipal(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaPrincipal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaPrincipal.fxml"));
         Parent root = loader.load();
         ControladorPrincipal controladorPrincipal = loader.getController();
         controladorPrincipal.init(txtNombre.getText(), stage, this);
@@ -41,7 +41,7 @@ public boolean  isImage1 = true;
     }
     @FXML
     void mostrarVentanaRegistrarse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaRegistro.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaRegistro.fxml"));
         Parent root = loader.load();
         ControladorRegistro controladorRegistro = loader.getController();
         controladorRegistro.init( stage, this);
@@ -61,9 +61,9 @@ public boolean  isImage1 = true;
 
     void switchImage(MouseEvent event) {
         if (isImage1) {
-            imagen.setImage(new Image(getClass().getResource("/imagenes/icono-usuario.jpg").toExternalForm()));
+            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario.jpg").toExternalForm()));
         } else {
-            imagen.setImage(new Image(getClass().getResource("/imagenes/icono-usuario-2.jpg").toExternalForm()));
+            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario-2.jpg").toExternalForm()));
         }
 
         isImage1 = !isImage1;

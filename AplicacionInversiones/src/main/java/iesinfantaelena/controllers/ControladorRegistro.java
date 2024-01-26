@@ -1,4 +1,4 @@
-package com.controlador;
+package iesinfantaelena.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class ControladorRegistro {
-    private ControladorAcceso controladorAcceso;
+    private LoginController controladorAcceso;
     private Stage stage;
 
     @FXML
@@ -27,7 +27,7 @@ public class ControladorRegistro {
     @FXML
     private TextField txtPasswordCheck;
 
-    public void init(Stage stage, ControladorAcceso controlador1) {
+    public void init(Stage stage, LoginController controlador1) {
        
         this.controladorAcceso = controlador1;
         this.stage = stage;
@@ -51,9 +51,9 @@ public boolean comprobarError(TextField textField){
     return textField.getText().isEmpty();
 }
 public void mostrarVentanaAcceso() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaAcceso.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaAcceso.fxml"));
     Parent root = loader.load();
-    ControladorAcceso controlador1 = loader.getController();
+    LoginController controlador1 = loader.getController();
     Scene scene = new Scene(root);
     Stage stage1 = new Stage();
     stage1.setScene(scene);

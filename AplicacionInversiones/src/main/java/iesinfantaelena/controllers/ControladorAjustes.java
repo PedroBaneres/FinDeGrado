@@ -1,4 +1,4 @@
-package com.controlador;
+package iesinfantaelena.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class ControladorAjustes {
     }
     @FXML
     void mostrarVentanaPrincipal(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaPrincipal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaPrincipal.fxml"));
         Parent root = loader.load();
         ControladorPrincipal controladorPrincipal = loader.getController();
         Scene scene = new Scene(root);
@@ -33,9 +33,9 @@ public class ControladorAjustes {
     }
     @FXML
     public void mostrarVentanaAcceso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/controlador/ventanaAcceso.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaAcceso.fxml"));
         Parent root = loader.load();
-        ControladorAcceso controlador1 = loader.getController();
+        LoginController controlador1 = loader.getController();
         Scene scene = new Scene(root);
         Stage stage1 = new Stage();
         stage1.setScene(scene);

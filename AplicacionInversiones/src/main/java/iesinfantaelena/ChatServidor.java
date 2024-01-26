@@ -1,4 +1,4 @@
-package com;
+package iesinfantaelena;
 
 import java.io.IOException;
 import java.net.ServerSocket;
