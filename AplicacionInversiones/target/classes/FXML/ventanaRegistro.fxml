@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" style="-fx-background-color: lightgray; -fx-border-color: black;-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.ControladorRegistro">
+   <children>
+      <Button layoutX="158.0" layoutY="324.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="25.0" prefWidth="149.0" text="Registrarse" />
+      <Label layoutX="41.0" layoutY="67.0" text="Nombre:" />
+      <Label layoutX="41.0" layoutY="101.0" text="Usuario:" />
+      <Label layoutX="41.0" layoutY="135.0" text="Correo:" />
+      <Label layoutX="42.0" layoutY="171.0" prefHeight="17.0" prefWidth="43.0" text="Ciudad:" />
+      <Label layoutX="41.0" layoutY="209.0" text="Contraseña" />
+      <Label layoutX="41.0" layoutY="243.0" text="Repita Contraseña:" />
+      <TextField fx:id="txtNombreRegistro" layoutX="158.0" layoutY="63.0" />
+      <TextField fx:id="txtUsuario" layoutX="158.0" layoutY="97.0" />
+      <TextField fx:id="txtCorreo" layoutX="158.0" layoutY="131.0" />
+      <TextField fx:id="txtCiudad" layoutX="158.0" layoutY="167.0" />
+      <TextField fx:id="txtPassword" layoutX="158.0" layoutY="205.0" />
+      <TextField fx:id="txtPasswordCheck" layoutX="158.0" layoutY="239.0" />
+
+
+   </children>
+</AnchorPane>

@@ -29,7 +29,7 @@ public boolean  isImage1 = true;
 
     @FXML
     void mostrarVentanaPrincipal(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaPrincipal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaPrincipal.fxml"));
         Parent root = loader.load();
         ControladorPrincipal controladorPrincipal = loader.getController();
         controladorPrincipal.init(txtNombre.getText(), stage, this);
@@ -41,7 +41,7 @@ public boolean  isImage1 = true;
     }
     @FXML
     void mostrarVentanaRegistrarse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaRegistro.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaRegistro.fxml"));
         Parent root = loader.load();
         ControladorRegistro controladorRegistro = loader.getController();
         controladorRegistro.init( stage, this);

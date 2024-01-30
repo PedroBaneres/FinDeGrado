@@ -1,0 +1,14 @@
+.contenedor_login {
+    -fx-background-color: #EEEEEE;
+}
+.login_contenedor_logo{
+    -fx-alignment: center;
+    -fx-background-color: #ADD8E6;
+}
+.login_contenedor_logo Text {
+    -fx-font-size: 2.5em;
+    -fx-fill: rgb(128, 128, 128);
+}
+.login_contenedor_logo FontAwesomeIconView {
+    -fx-fill: rgb(128, 128, 128);
+}

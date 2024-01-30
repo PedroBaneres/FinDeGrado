@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.ControladorPrincipal">
+   <children>
+      <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
+      <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Cartera" />
+          <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAjustes" text="Ajustes" />
+            <MenuItem mnemonicParsing="false" text="Soporte" />
+            <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAcceso" text="Cerrar Sesión" />
+        </items>
+      </MenuButton>
+      <TextArea editable="false" layoutX="108.0" layoutY="103.0" prefHeight="311.0" prefWidth="423.0" />
+      <TextField alignment="CENTER_RIGHT" layoutX="108.0" layoutY="414.0" prefHeight="37.0" prefWidth="423.0" promptText="Escribanos su problema" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</Pane>

@@ -51,7 +51,7 @@ public boolean comprobarError(TextField textField){
     return textField.getText().isEmpty();
 }
 public void mostrarVentanaAcceso() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/iesinfantaelena/controllers/ventanaAcceso.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
     Parent root = loader.load();
     LoginController controlador1 = loader.getController();
     Scene scene = new Scene(root);
