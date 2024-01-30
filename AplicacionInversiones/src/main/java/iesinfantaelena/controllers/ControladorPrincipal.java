@@ -43,7 +43,20 @@ public class ControladorPrincipal {
         currentStage.close();
         stage1.show();
     }
-
+    @FXML
+    public void mostrarVentanaChat(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
+        Parent root = loader.load();
+        ControladorChat controladorChat = loader.getController();
+        Scene scene = new Scene(root);
+        Stage stage1 = new Stage();
+        stage1.setScene(scene);
+        controladorChat.setStage(stage1);
+        Stage currentStage = (Stage)  labelNombre.getScene().getWindow();
+        currentStage.close();
+        controladorChat.initialize();
+        stage1.show();
+    }
 
     public void init(String text, Stage stage, LoginController controlador1) {
         labelNombre.setText("Bienvenido " + text);

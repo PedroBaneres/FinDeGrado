@@ -14,7 +14,7 @@
          <items>
             <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaPrincipal" text="Cartera" />
             <MenuItem mnemonicParsing="false" text="Ajustes" />
-            <MenuItem mnemonicParsing="false" text="Soporte" />
+            <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaChat" text="Soporte" />
             <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAcceso" text="Cerrar Sesión" />
          </items>
       </MenuButton>

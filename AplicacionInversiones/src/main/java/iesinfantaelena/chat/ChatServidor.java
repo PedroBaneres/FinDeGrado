@@ -1,4 +1,4 @@
-package iesinfantaelena;
+package iesinfantaelena.chat;
 
 import java.io.IOException;
 import java.net.ServerSocket;

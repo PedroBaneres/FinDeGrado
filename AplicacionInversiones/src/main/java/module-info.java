@@ -12,4 +12,6 @@ module com.example.comunicacionentreventanas {
     exports iesinfantaelena.controllers;
     exports iesinfantaelena;
     opens iesinfantaelena to javafx.fxml;
+    exports iesinfantaelena.chat;
+    opens iesinfantaelena.chat to javafx.fxml;
 }

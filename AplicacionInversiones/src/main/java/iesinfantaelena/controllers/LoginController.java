@@ -51,6 +51,19 @@ public boolean  isImage1 = true;
         stage2.show();
         stage.close();
     }
+    @FXML
+    void mostrarChatAdmin(ActionEvent event) throws IOException{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChatAdmin.fxml"));
+            Parent root = loader.load();
+            AdminChatController controladorAdmin = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage2 = new Stage();
+            stage2.setScene(scene);
+            controladorAdmin.initialize();
+            stage2.show();
+            stage.close();
+        }
+
 
 
     public void setStage(Stage stage) {
