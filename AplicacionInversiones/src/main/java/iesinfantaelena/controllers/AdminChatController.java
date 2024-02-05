@@ -1,5 +1,6 @@
 package iesinfantaelena.controllers;
 
+import iesinfantaelena.controllers.client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,9 +70,13 @@ public class AdminChatController {
     private void startServer() {
         new Thread(() -> {
             try {
+                int i = 0;
                 while (true) {
+
                     Socket clientSocket = serverSocket.accept();
-                    handleClient(clientSocket);
+                    Client client = new Client("Cliente " + i, clientSocket); //aqui sencillamente se cogeria el cliente de la bdd y se le asigna el socket como cliente
+                    handleClient(client);
+                    i++;
                 }
             } catch (SocketException e) {
             //fantasma
@@ -81,14 +86,14 @@ public class AdminChatController {
         }).start();
     }
 
-    private void handleClient(Socket clientSocket) {
+    private void handleClient(Client client) {
         new Thread(() -> {
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new PrintWriter(client.getClientSocket().getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
                 String message;
                 while ((message = in.readLine()) != null) {
-                    appendToConversation("Cliente: " + message);
+                    appendToConversation(client.getUsername()  +": " + message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

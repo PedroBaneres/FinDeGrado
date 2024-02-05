@@ -90,7 +90,7 @@ public class    ControladorChat {
             });
             serverInputHandler.start();
         } catch (IOException e) {
-            conversationTextArea.setText("Soporte fuera de servicio");
+            conversationTextArea.setText("Soporte fuera de servicio"); //añadir boton refresh que se muestre
         }
     }
 
@@ -99,6 +99,7 @@ public class    ControladorChat {
         String message = messageTextField.getText();
         if (!message.isEmpty()) {
             out.println(message);
+            //sustituir cliente por el nombre de la BBDD
             appendToConversation("Cliente: " + message);
             messageTextField.clear();
         }

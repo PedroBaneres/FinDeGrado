@@ -1,4 +1,4 @@
-module com.example.comunicacionentreventanas {
+module com.example.AplicacionInversiones{
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.base;
@@ -12,6 +12,4 @@ module com.example.comunicacionentreventanas {
     exports iesinfantaelena.controllers;
     exports iesinfantaelena;
     opens iesinfantaelena to javafx.fxml;
-    exports iesinfantaelena.chat;
-    opens iesinfantaelena.chat to javafx.fxml;
 }
