@@ -26,7 +26,7 @@
                </image>
             </ImageView>
             <TextField fx:id="txtNombre" onAction="#mostrarVentanaPrincipal" />
-            <TextField fx:id="txtPassword" onAction="#mostrarVentanaPrincipal" />
+            <PasswordField fx:id="txtPassword" onAction="#mostrarVentanaPrincipal" />
          </children>
       </VBox>
       <Button mnemonicParsing="false" onAction="#mostrarChatAdmin" text="Button" />

@@ -16,7 +16,7 @@
       <TextField fx:id="txtApellido" layoutX="158.0" layoutY="99.0" />
       <TextField fx:id="txtUsuario" layoutX="158.0" layoutY="133.0" />
       <TextField fx:id="txtCorreo" layoutX="158.0" layoutY="167.0" />
-      <TextField fx:id="txtPassword" layoutX="158.0" layoutY="205.0" />
-      <TextField fx:id="txtPasswordCheck" layoutX="158.0" layoutY="244.0" />
+      <PasswordField fx:id="txtPassword"  layoutX="158.0" layoutY="205.0" />
+      <PasswordField fx:id="txtPasswordCheck" layoutX="158.0" layoutY="244.0" />
    </children>
 </AnchorPane>
