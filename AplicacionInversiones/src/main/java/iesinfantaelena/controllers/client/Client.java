@@ -7,6 +7,12 @@ public class Client {
     private Socket clientSocket;
     private String username;
 
+    private String name;
+    private String surname;
+    private String mail;
+
+    private String password;
+
     public Socket getClientSocket() {
         return clientSocket;
     }

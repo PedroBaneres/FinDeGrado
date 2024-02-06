@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.*;
 
 public class ControladorRegistro {
     private LoginController controladorAcceso;
@@ -21,7 +22,7 @@ public class ControladorRegistro {
     @FXML
     private TextField txtCorreo;
     @FXML
-    private TextField txtCiudad;
+    private TextField txtApellido;
     @FXML
     private TextField txtPassword;
     @FXML
@@ -34,21 +35,77 @@ public class ControladorRegistro {
     }
     public void registrarse() throws IOException {
 
-       if(comprobarError(txtCiudad) || comprobarError(txtCorreo) || comprobarError(txtUsuario) ||
-        comprobarError(txtPasswordCheck) || comprobarError(txtPassword) || comprobarError(txtNombreRegistro)){
+       if(comprobarError(txtCorreo) || comprobarError(txtUsuario) ||
+        comprobarError(txtPasswordCheck) || comprobarError(txtPassword) || comprobarError(txtNombreRegistro) || comprobarError(txtApellido)){
            JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
         } else
-//comprobar si existe Usuario/correo en BBDD
         if (!txtPassword.getText().equals(txtPasswordCheck.getText())){
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", javax.swing.JOptionPane.WARNING_MESSAGE);
-        }
-        else {//registrar usuario BBDD
+        } else
+        if (usuarioExistente(txtUsuario.getText())) {
+            JOptionPane.showMessageDialog(null, "El nombre de usuario ya está en uso", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else
+            // Verificar si el nombre de usuario contiene "admin"
+            if (txtUsuario.getText().toLowerCase().contains("admin")) {
+                JOptionPane.showMessageDialog(null, "El nombre de usuario contiene una palabra reservada", "Error", JOptionPane.WARNING_MESSAGE);
+            } else
+        // Intentar registrar el usuario en la base de datos
+        try {
+            // Establecer la conexión con la base de datos
+            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+            // Crear la consulta SQL para insertar un nuevo usuario
+            String sql = "INSERT INTO users (name, username, mail, surname , password) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, txtNombreRegistro.getText());
+            statement.setString(2, txtUsuario.getText());
+            statement.setString(3, txtCorreo.getText());
+            statement.setString(4, txtApellido.getText());
+            statement.setString(5, txtPassword.getText());
+
+            // Ejecutar la consulta
+            statement.executeUpdate();
+
+            // Cerrar la conexión
+            connection.close();
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+            // Mostrar la ventana de acceso
             mostrarVentanaAcceso();
+        } catch (SQLException | IOException e) {
+            // Manejar cualquier error de SQL o IO
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al registrar usuario", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    // Método para verificar si un usuario ya existe en la base de datos
+    private boolean usuarioExistente(String usuario) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+            String sql = "SELECT COUNT(*) AS count FROM users WHERE username = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, usuario);
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            int count = resultSet.getInt("count");
+            connection.close();
+            return count > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al verificar usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+    }
+
+
+
 public boolean comprobarError(TextField textField){
-    return textField.getText().isEmpty();
+        if (textField.getText()!=null) return textField.getText().isEmpty();
+        else return true;
 }
 public void mostrarVentanaAcceso() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
