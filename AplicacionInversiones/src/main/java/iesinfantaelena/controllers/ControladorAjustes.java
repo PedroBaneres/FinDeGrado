@@ -14,6 +14,7 @@ public class ControladorAjustes {
     @FXML
     private Label labelNombre;
     private  Stage stage;
+    private MasterController masterController;
     public void setStage(Stage stage) {
         this.stage=stage;
     }
@@ -24,7 +25,7 @@ public class ControladorAjustes {
     void mostrarVentanaPrincipal(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaPrincipal.fxml"));
         Parent root = loader.load();
-        ControladorPrincipal controladorPrincipal = loader.getController();
+        HomepageController homepageController = loader.getController();
         Scene scene = new Scene(root);
         Stage stage2 = new Stage();
         stage2.setScene(scene);
@@ -55,7 +56,7 @@ public class ControladorAjustes {
             controladorChat.setStage(stage1);
             Stage currentStage = (Stage)  labelNombre.getScene().getWindow();
             currentStage.close();
-            controladorChat.initialize();
+            controladorChat.initialize(stage1,masterController);
             stage1.show();
         }
     }

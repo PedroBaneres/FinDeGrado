@@ -13,10 +13,10 @@
       <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
       <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="MenuButton">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaPrincipal" text="Cartera"  />
+          <MenuItem mnemonicParsing="false" onAction="#goToHomepage" text="Cartera"  />
           <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAjustes" text="Ajustes" />
             <MenuItem mnemonicParsing="false" text="Soporte" />
-            <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAcceso" text="Cerrar Sesión" />
+            <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
         </items>
       </MenuButton>
       <TextArea fx:id="conversationTextArea" editable="false" layoutX="108.0" layoutY="103.0" prefHeight="311.0" prefWidth="423.0" />

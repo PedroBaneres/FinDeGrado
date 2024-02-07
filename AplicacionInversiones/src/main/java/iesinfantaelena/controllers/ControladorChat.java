@@ -1,5 +1,6 @@
 package iesinfantaelena.controllers;
 
+import iesinfantaelena.controllers.client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class    ControladorChat {
+    private MasterController masterController;
     private  Stage stage;
     @FXML
     private Label labelNombre;
@@ -36,29 +38,15 @@ public class    ControladorChat {
         this.stage.show();
     }
     @FXML
-    public void mostrarVentanaAcceso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
-        Parent root = loader.load();
-        LoginController controlador1 = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        controlador1.setStage(stage1);
-        Stage currentStage = (Stage)  labelNombre.getScene().getWindow();
-        currentStage.close();
-        stage1.show();
+    public void logOut(ActionEvent event) throws IOException {
+        masterController.logOut();
+        stage.close();
     }
 
     @FXML
-    void mostrarVentanaPrincipal(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaPrincipal.fxml"));
-        Parent root = loader.load();
-        ControladorPrincipal controladorPrincipal = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage2 = new Stage();
-        stage2.setScene(scene);
-        stage2.show();
-        stage.close();
+    void goToHomepage(ActionEvent event) throws IOException {
+        User user = masterController.activeUser;
+
     }
     @FXML
     public void mostrarVentanaAjustes(ActionEvent event) throws IOException {
@@ -73,7 +61,9 @@ public class    ControladorChat {
         currentStage.close();
         stage1.show();
     }
-    public void initialize() {
+    public void initialize(Stage stage, MasterController masterController) {
+        this.stage = stage;
+        this.masterController = masterController;
         try {
             socket = new Socket("localhost", 6000);
             out = new PrintWriter(socket.getOutputStream(), true);
@@ -99,8 +89,7 @@ public class    ControladorChat {
         String message = messageTextField.getText();
         if (!message.isEmpty()) {
             out.println(message);
-            //sustituir cliente por el nombre de la BBDD
-            appendToConversation("Cliente: " + message);
+            appendToConversation(masterController.activeUser.getUsername() + ": " + message);
             messageTextField.clear();
         }
     }

@@ -25,15 +25,14 @@
                   <Image url="@../images/icono-usuario.jpg" />
                </image>
             </ImageView>
-            <TextField fx:id="txtNombre" onAction="#mostrarVentanaPrincipal" />
-            <PasswordField fx:id="txtPassword" onAction="#mostrarVentanaPrincipal" />
+            <TextField fx:id="txtNombre" onAction="#logIn" />
+            <PasswordField fx:id="txtPassword" onAction="#logIn" />
          </children>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#mostrarChatAdmin" text="Button" />
+
       <Label layoutX="329.0" layoutY="235.0" text="Usuario:" />
       <Label layoutX="319.0" layoutY="264.0" text="Contraseña:" />
-      <Button layoutX="411.0" layoutY="322.0" mnemonicParsing="false" onAction="#mostrarVentanaRegistrarse" prefHeight="25.0" prefWidth="149.0" text="Registrarse" />
-      <Button layoutX="411.0" layoutY="297.0" mnemonicParsing="false" onAction="#mostrarVentanaPrincipal" prefHeight="25.0" prefWidth="149.0" text="Acceder" />
-      <Button mnemonicParsing="false" text="Button" onAction="#mostrarChatAdmin"/>
+      <Button layoutX="411.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="25.0" prefWidth="149.0" text="Registrarse" />
+      <Button layoutX="411.0" layoutY="297.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="149.0" text="Acceder" />
    </children>
 </AnchorPane>

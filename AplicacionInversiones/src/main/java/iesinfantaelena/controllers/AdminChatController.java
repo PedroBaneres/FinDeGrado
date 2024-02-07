@@ -1,6 +1,6 @@
 package iesinfantaelena.controllers;
 
-import iesinfantaelena.controllers.client.Client;
+import iesinfantaelena.controllers.client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +26,9 @@ public class AdminChatController {
     private Label labelNombre;
     @FXML
     private TextArea conversationTextAreaAdmin;
-
     @FXML
     private TextField messageTextFieldAdmin;
-
+    private MasterController masterController;
     private ServerSocket serverSocket;
     private PrintWriter out;
 
@@ -58,7 +57,8 @@ public class AdminChatController {
         stage1.show();
     }
 
-    public void initialize() {
+    public void initialize(MasterController masterController) {
+        this.masterController = masterController;
         try {
             serverSocket = new ServerSocket(6000);
             startServer();
@@ -72,10 +72,9 @@ public class AdminChatController {
             try {
                 int i = 0;
                 while (true) {
-
                     Socket clientSocket = serverSocket.accept();
-                    Client client = new Client("Cliente " + i, clientSocket); //aqui sencillamente se cogeria el cliente de la bdd y se le asigna el socket como cliente
-                    handleClient(client);
+                    User user = new User("Cliente " + i, clientSocket); //aqui sencillamente se cogeria el cliente de la bdd y se le asigna el socket como cliente
+                    handleClient(user);
                     i++;
                 }
             } catch (SocketException e) {
@@ -86,14 +85,14 @@ public class AdminChatController {
         }).start();
     }
 
-    private void handleClient(Client client) {
+    private void handleClient(User user) {
         new Thread(() -> {
             try {
-                out = new PrintWriter(client.getClientSocket().getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
+                out = new PrintWriter(user.getClientSocket().getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(user.getClientSocket().getInputStream()));
                 String message;
                 while ((message = in.readLine()) != null) {
-                    appendToConversation(client.getUsername()  +": " + message);
+                    appendToConversation(user.getUsername()  +": " + message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

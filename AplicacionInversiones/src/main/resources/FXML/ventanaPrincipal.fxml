@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.HomepageController">
    <children>
       <VBox layoutX="65.0" layoutY="208.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="237.0" prefWidth="518.0" />
       <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
@@ -15,8 +15,8 @@
         <items>
           <MenuItem mnemonicParsing="false" text="Cartera" />
           <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAjustes" text="Ajustes" />
-            <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaChat" text="Soporte" />
-            <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAcceso" text="Cerrar Sesión" />
+            <MenuItem mnemonicParsing="false" onAction="#switchToSupport" text="Soporte" />
+            <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
         </items>
       </MenuButton>
    </children>
