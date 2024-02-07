@@ -56,6 +56,7 @@ public class SupportChatController {
             socket = new Socket("localhost", 6000);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out.println(masterController.activeUser.getUsername());
             Thread serverInputHandler = new Thread(() -> {
                 try {
                     String serverInput;

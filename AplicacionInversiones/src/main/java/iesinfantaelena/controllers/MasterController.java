@@ -13,7 +13,7 @@ import java.sql.*;
 public class MasterController {
 
     private Stage stage;
-
+private Stage chatStage;
     public Stage getStage() {
         return stage;
     }
@@ -46,10 +46,10 @@ public class MasterController {
         Parent root = loader.load();
         SupportChatController supportChatController = loader.getController();
         Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        supportChatController.initialize(stage1,this);
-        stage1.show();
+        chatStage = new Stage();
+        chatStage.setScene(scene);
+        supportChatController.initialize(chatStage,this);
+        chatStage.show();
     }
     public void switchToSettings() throws IOException{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAjustes.fxml"));
@@ -152,6 +152,7 @@ public class MasterController {
         controlador.setMasterController(this);
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        if (chatStage!=null)chatStage.close();
         activeUser = null;
     }
 }

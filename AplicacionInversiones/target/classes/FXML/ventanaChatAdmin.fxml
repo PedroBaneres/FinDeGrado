@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ChoiceBox?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.AdminChatController">
     <children>
@@ -17,7 +17,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
             </items>
         </MenuButton>
-        <ListView fx:id="connectedClientsList" layoutX="10.0" layoutY="103.0" prefHeight="311.0" prefWidth="80.0" />
+        <ChoiceBox fx:id="connectedClientsChoiceBox" layoutX="10.0" layoutY="103.0" prefWidth="80.0" onAction="#selectClient" value="Clientes"/>
         <TextArea fx:id="conversationTextAreaAdmin" editable="false" layoutX="108.0" layoutY="103.0" prefHeight="311.0" prefWidth="423.0" />
         <TextField fx:id="messageTextFieldAdmin" alignment="CENTER_RIGHT" layoutX="108.0" layoutY="414.0" prefHeight="37.0" prefWidth="423.0"  onAction="#sendMessage"/>
     </children>
@@ -25,3 +25,4 @@
         <Cursor fx:constant="HAND" />
     </cursor>
 </Pane>
+
