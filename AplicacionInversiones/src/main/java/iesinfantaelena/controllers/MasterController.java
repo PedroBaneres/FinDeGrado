@@ -13,6 +13,11 @@ import java.sql.*;
 public class MasterController {
 
     private Stage stage;
+
+    public Stage getStage() {
+        return stage;
+    }
+
     public User activeUser;
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -25,7 +30,7 @@ public class MasterController {
         scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
         LoginController controladorAcceso = loader.getController();
         controladorAcceso.setMasterController(this);
-        controladorAcceso.setStage(stage);
+        this.stage = stage;
         stage.show();
     }
     public void switchToRegistration() throws IOException {
@@ -33,21 +38,30 @@ public class MasterController {
         Parent root = loader.load();
         RegisterController registerController = loader.getController();
         Scene scene = new Scene(root);
-        Stage stage2 = new Stage();
-        registerController.init(stage2, this);
-        stage2.setScene(scene);
-        stage2.show();
+        registerController.initialize( this);
+        stage.setScene(scene);
     }
     public void switchToSupportChat() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
         Parent root = loader.load();
-        ControladorChat controladorChat = loader.getController();
+        SupportChatController supportChatController = loader.getController();
         Scene scene = new Scene(root);
         Stage stage1 = new Stage();
         stage1.setScene(scene);
-        controladorChat.initialize(stage1,this);
+        supportChatController.initialize(stage1,this);
         stage1.show();
     }
+    public void switchToSettings() throws IOException{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAjustes.fxml"));
+            Parent root = loader.load();
+            SettingsController settingsController = loader.getController();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            settingsController.initialize(this);
+        }
+    public void switchToHomepage() throws IOException{
+        logAsClient();
+}
     public boolean userExists(String usuario) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
@@ -120,31 +134,24 @@ public class MasterController {
         Parent root = loader.load();
         AdminChatController controladorAdmin = loader.getController();
         Scene scene = new Scene(root);
-        Stage stage2 = new Stage();
-        stage2.setScene(scene);
         controladorAdmin.initialize(this);
-        stage2.show();
+        stage.setScene(scene);
     }
     private void logAsClient() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaPrincipal.fxml"));
         Parent root = loader.load();
         HomepageController homepageController = loader.getController();
         Scene scene = new Scene(root);
-        Stage stage2 = new Stage();
-        homepageController.init(stage2,this);
-        stage2.setScene(scene);
-        stage2.show();
+        homepageController.initialize(this);
+        stage.setScene(scene);
     }
     public void logOut() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
-        LoginController controlador1 = loader.getController();
-        controlador1.setMasterController(this);
+        LoginController controlador = loader.getController();
+        controlador.setMasterController(this);
         Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        controlador1.setStage(stage1);
-        stage1.show();
+        stage.setScene(scene);
         activeUser = null;
     }
 }

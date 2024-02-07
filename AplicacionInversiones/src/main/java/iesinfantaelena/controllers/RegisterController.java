@@ -1,9 +1,6 @@
 package iesinfantaelena.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -28,9 +25,9 @@ public class RegisterController {
     @FXML
     private PasswordField txtPasswordCheck;
 
-    public void init(Stage stage, MasterController masterController) {
+    public void initialize(MasterController masterController) {
         this.masterController = masterController;
-        this.stage = stage;
+        this.stage = masterController.getStage();
     }
     public void register() throws IOException {
 
@@ -59,7 +56,6 @@ public class RegisterController {
 
             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             masterController.logOut();
-            stage.close();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al registrar usuario", "Error", JOptionPane.ERROR_MESSAGE);

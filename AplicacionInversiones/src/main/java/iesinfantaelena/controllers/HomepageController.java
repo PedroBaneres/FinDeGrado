@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class HomepageController {
     private MasterController masterController;
-    private ControladorAjustes controladorAjustes;
     private Stage stage;
     @FXML
     private Label labelNombre;
@@ -20,30 +19,19 @@ public class HomepageController {
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         masterController.logOut();
-        stage.close();
     }
     @FXML
-    public void mostrarVentanaAjustes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAjustes.fxml"));
-        Parent root = loader.load();
-        ControladorAjustes controladorAjustes = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        controladorAjustes.setStage(stage1);
-        Stage currentStage = (Stage)  labelNombre.getScene().getWindow();
-        currentStage.close();
-        stage1.show();
+    public void goToSettings(ActionEvent event) throws IOException {
+        masterController.switchToSettings();
     }
     @FXML
-    public void switchToSupport(ActionEvent event) throws IOException{
+    public void goToSupport(ActionEvent event) throws IOException{
         masterController.switchToSupportChat();
-        stage.close();
     }
 
-    public void init(Stage stage, MasterController masterController) {
+    public void initialize(MasterController masterController) {
         labelNombre.setText("Bienvenido " + masterController.activeUser.getUsername());
         this.masterController= masterController;
-        this.stage = stage;
+        this.stage = masterController.getStage();
     }
 }

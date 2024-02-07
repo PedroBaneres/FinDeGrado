@@ -1,11 +1,7 @@
 package iesinfantaelena.controllers;
 
-import iesinfantaelena.controllers.client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -17,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class    ControladorChat {
+public class SupportChatController {
     private MasterController masterController;
     private  Stage stage;
     @FXML
@@ -40,29 +36,21 @@ public class    ControladorChat {
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         masterController.logOut();
+    }
+
+    @FXML
+    public void goToHomepage(ActionEvent event) throws IOException {
+        masterController.switchToHomepage();
+    }
+
+    @FXML
+    public void goToSettings(ActionEvent event) throws IOException{
+        masterController.switchToSettings();
         stage.close();
     }
 
-    @FXML
-    void goToHomepage(ActionEvent event) throws IOException {
-        User user = masterController.activeUser;
-
-    }
-    @FXML
-    public void mostrarVentanaAjustes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAjustes.fxml"));
-        Parent root = loader.load();
-        ControladorAjustes controladorAjustes = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        controladorAjustes.setStage(stage1);
-        Stage currentStage = (Stage)  labelNombre.getScene().getWindow();
-        currentStage.close();
-        stage1.show();
-    }
     public void initialize(Stage stage, MasterController masterController) {
-        this.stage = stage;
+
         this.masterController = masterController;
         try {
             socket = new Socket("localhost", 6000);
@@ -88,11 +76,13 @@ public class    ControladorChat {
     public void sendMessage() {
         String message = messageTextField.getText();
         if (!message.isEmpty()) {
-            out.println(message);
-            appendToConversation(masterController.activeUser.getUsername() + ": " + message);
+            String username = masterController.activeUser.getUsername();
+            out.println(username + ": " + message); // Send username along with the message
+            appendToConversation(username + ": " + message);
             messageTextField.clear();
         }
     }
+
     private void appendToConversation(String message) {
         conversationTextArea.appendText(message + "\n");
     }

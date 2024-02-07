@@ -41,24 +41,13 @@ public class AdminChatController {
     }
 
     @FXML
-    public void mostrarVentanaAcceso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
-        Parent root = loader.load();
-        LoginController controlador1 = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        controlador1.setStage(stage1);
-        Stage currentStage = (Stage) labelNombre.getScene().getWindow();
-        currentStage.close();
-
-            serverSocket.close();
-
-        stage1.show();
+    public void logOut(ActionEvent event) throws IOException {
+        masterController.logOut();
     }
 
     public void initialize(MasterController masterController) {
         this.masterController = masterController;
+        this.stage = masterController.getStage();
         try {
             serverSocket = new ServerSocket(6000);
             startServer();
@@ -70,12 +59,12 @@ public class AdminChatController {
     private void startServer() {
         new Thread(() -> {
             try {
-                int i = 0;
+
                 while (true) {
                     Socket clientSocket = serverSocket.accept();
-                    User user = new User("Cliente " + i, clientSocket); //aqui sencillamente se cogeria el cliente de la bdd y se le asigna el socket como cliente
-                    handleClient(user);
-                    i++;
+                    masterController.activeUser.setClientSocket(clientSocket); //aqui sencillamente se cogeria el cliente de la bdd y se le asigna el socket como cliente
+                    handleClient(masterController.activeUser);
+
                 }
             } catch (SocketException e) {
             //fantasma
@@ -92,13 +81,23 @@ public class AdminChatController {
                 BufferedReader in = new BufferedReader(new InputStreamReader(user.getClientSocket().getInputStream()));
                 String message;
                 while ((message = in.readLine()) != null) {
-                    appendToConversation(user.getUsername()  +": " + message);
+                    // Parse client's username from the message
+                    String[] parts = message.split(": ", 2);
+                    if (parts.length == 2) {
+                        String clientUsername = parts[0];
+                        String clientMessage = parts[1];
+                        appendToConversation(clientUsername + ": " + clientMessage);
+                    } else {
+                        // If unable to parse username, just display the message
+                        appendToConversation(message);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
     }
+
 
 
 

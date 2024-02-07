@@ -40,7 +40,6 @@ public class LoginController {
             String password = txtPassword.getText();
             if (masterController.verifyPassword(username, password)) {
                 masterController.logIn(username);
-                stage.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta. Por favor, inténtelo de nuevo.", "Error", JOptionPane.WARNING_MESSAGE);
             }
@@ -50,7 +49,6 @@ public class LoginController {
     @FXML
     void switchToRegistration(ActionEvent event) throws IOException {
         masterController.switchToRegistration();
-        stage.close();
     }
     public void setStage(Stage stage) {
         this.stage=stage;

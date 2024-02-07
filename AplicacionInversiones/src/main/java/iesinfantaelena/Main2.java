@@ -1,6 +1,7 @@
 package iesinfantaelena;
 
 import iesinfantaelena.controllers.LoginController;
+import iesinfantaelena.controllers.MasterController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,19 +11,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main2 extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
-        LoginController controladorAcceso = loader.getController();
-        controladorAcceso.setStage(stage);
-        stage.show();
-    }
+        @Override
+        public void start(Stage stage) throws IOException {
+            MasterController masterController = new MasterController();
+            masterController.start(stage);
+        }
 
-    public static void main(String[] args) {
-        launch(args);
+        public static void main(String[] args) {
+            launch(args);
+        }
     }
-}

@@ -14,7 +14,7 @@
         <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Admin" />
         <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="MenuButton">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#mostrarVentanaAcceso" text="Cerrar Sesión" />
+                <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
             </items>
         </MenuButton>
         <ListView fx:id="connectedClientsList" layoutX="10.0" layoutY="103.0" prefHeight="311.0" prefWidth="80.0" />
