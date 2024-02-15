@@ -1,5 +1,6 @@
-package iesinfantaelena.controllers;
+package iesinfantaelena.controllers.client;
 
+import iesinfantaelena.controllers.MasterController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

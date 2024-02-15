@@ -1,6 +1,10 @@
 package iesinfantaelena.controllers;
 
-import iesinfantaelena.controllers.client.User;
+import iesinfantaelena.controllers.client.SettingsController;
+import iesinfantaelena.controllers.admin.AdminChatController;
+import iesinfantaelena.controllers.client.HomepageController;
+import iesinfantaelena.User;
+import iesinfantaelena.controllers.client.SupportChatController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,20 +12,18 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.Socket;
 import java.sql.*;
 
 public class MasterController {
 
     private Stage stage;
-private Stage chatStage;
+    private Stage chatStage;
     public Stage getStage() {
         return stage;
     }
-
+private Socket connectionSocket;
     public User activeUser;
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
@@ -42,6 +44,7 @@ private Stage chatStage;
         stage.setScene(scene);
     }
     public void switchToSupportChat() throws IOException{
+        if (chatStage==null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
         Parent root = loader.load();
         SupportChatController supportChatController = loader.getController();
@@ -49,6 +52,8 @@ private Stage chatStage;
         chatStage = new Stage();
         chatStage.setScene(scene);
         supportChatController.initialize(chatStage,this);
+        connectionSocket = supportChatController.getSocket();}
+        else chatStage.hide();
         chatStage.show();
     }
     public void switchToSettings() throws IOException{
@@ -106,7 +111,7 @@ private Stage chatStage;
     public User getClientFromDatabase(String username) {
         try {
             // Establish connection to the database
-            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+            Connection connection = getDatabaseConnection();
             // Prepare SQL statement to select client information based on the username
             String sql = "SELECT * FROM users WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -154,5 +159,36 @@ private Stage chatStage;
         stage.setScene(scene);
         if (chatStage!=null)chatStage.close();
         activeUser = null;
+
+    }
+    public Connection getDatabaseConnection() throws SQLException {
+        String url = "jdbc:mysql://192.168.56.101/Bank";
+        String username = "admin00";
+        String password = "alumno";
+
+        return DriverManager.getConnection(url, username, password);
+    }
+    public String loadConversation(User user){
+        String conversation = "";
+        String username = user.getUsername();
+        try (Connection connection = getDatabaseConnection()) {
+            String query = "SELECT conversation FROM users WHERE username = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        conversation = resultSet.getString("conversation");
+                    } else {
+                        System.out.println("No conversation found for user: " + username);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return conversation;
     }
 }

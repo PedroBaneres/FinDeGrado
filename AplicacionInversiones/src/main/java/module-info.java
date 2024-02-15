@@ -12,4 +12,8 @@ module com.example.AplicacionInversiones{
     exports iesinfantaelena.controllers;
     exports iesinfantaelena;
     opens iesinfantaelena to javafx.fxml;
+    exports iesinfantaelena.controllers.admin;
+    opens iesinfantaelena.controllers.admin to javafx.fxml;
+    exports iesinfantaelena.controllers.client;
+    opens iesinfantaelena.controllers.client to javafx.fxml;
 }

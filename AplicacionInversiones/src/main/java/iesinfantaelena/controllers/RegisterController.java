@@ -11,7 +11,7 @@ import java.sql.*;
 
 public class RegisterController {
     private Stage stage;
-    private  MasterController masterController;
+    private MasterController masterController;
     @FXML
     private TextField txtNombreRegistro;
     @FXML
@@ -42,7 +42,7 @@ public class RegisterController {
                 JOptionPane.showMessageDialog(null, "El nombre de usuario contiene una palabra reservada", "Error", JOptionPane.WARNING_MESSAGE);
             } else
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+            Connection connection = masterController.getDatabaseConnection();
             String sql = "INSERT INTO users (name, username, mail, surname , password) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, txtNombreRegistro.getText());

@@ -1,4 +1,4 @@
-package iesinfantaelena.controllers.client;
+package iesinfantaelena;
 
 import java.net.Socket;
 

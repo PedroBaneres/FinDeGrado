@@ -2,9 +2,6 @@ package iesinfantaelena.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -16,7 +13,6 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class LoginController {
-    private Stage stage;
     private MasterController masterController;
     public void setMasterController(MasterController masterController) {
         this.masterController = masterController;
@@ -28,9 +24,6 @@ public class LoginController {
     private TextField txtNombre;
     @FXML
     private PasswordField txtPassword;
-    public void show() {
-        this.stage.show();
-    }
     @FXML
     void logIn(ActionEvent event) throws IOException {
         String username = txtNombre.getText();
@@ -49,9 +42,6 @@ public class LoginController {
     @FXML
     void switchToRegistration(ActionEvent event) throws IOException {
         masterController.switchToRegistration();
-    }
-    public void setStage(Stage stage) {
-        this.stage=stage;
     }
     @FXML
     void switchImage(MouseEvent event) {

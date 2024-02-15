@@ -1,10 +1,8 @@
-package iesinfantaelena.controllers;
+package iesinfantaelena.controllers.client;
 
+import iesinfantaelena.controllers.MasterController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -12,7 +10,6 @@ import java.io.IOException;
 
 public class HomepageController {
     private MasterController masterController;
-    private Stage stage;
     @FXML
     private Label labelNombre;
 
@@ -32,6 +29,5 @@ public class HomepageController {
     public void initialize(MasterController masterController) {
         labelNombre.setText("Bienvenido " + masterController.activeUser.getUsername());
         this.masterController= masterController;
-        this.stage = masterController.getStage();
     }
 }
