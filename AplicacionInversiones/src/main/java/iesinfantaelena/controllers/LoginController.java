@@ -1,5 +1,6 @@
 package iesinfantaelena.controllers;
 
+import iesinfantaelena.excepcions.ServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -25,7 +26,7 @@ public class LoginController {
     @FXML
     private PasswordField txtPassword;
     @FXML
-    void logIn(ActionEvent event) throws IOException {
+    void logIn(ActionEvent event) throws IOException, ServerException {
         String username = txtNombre.getText();
         if (!masterController.userExists(username)) {
             JOptionPane.showMessageDialog(null, "El nombre de usuario no existe. Por favor, verifique que esté escrito correctamente o regístrese si aún no dispone de una cuenta.", "Error", JOptionPane.WARNING_MESSAGE);

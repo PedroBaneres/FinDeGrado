@@ -5,25 +5,34 @@ import iesinfantaelena.controllers.admin.AdminChatController;
 import iesinfantaelena.controllers.client.HomepageController;
 import iesinfantaelena.User;
 import iesinfantaelena.controllers.client.SupportChatController;
+import iesinfantaelena.excepcions.ServerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MasterController {
 
+    private static final Logger LOGGER = Logger.getLogger(MasterController.class.getName());
     private Stage stage;
     private Stage chatStage;
+    private Socket connectionSocket;
+
+    private ServerSocket serverSocket;
+    public User activeUser;
     public Stage getStage() {
         return stage;
     }
-private Socket connectionSocket;
-    public User activeUser;
+
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
@@ -102,7 +111,7 @@ private Socket connectionSocket;
             return false;
         }
     }
-    public void logIn(String username) throws IOException {
+    public void logIn(String username) throws IOException, ServerException {
     activeUser = getClientFromDatabase(username);
     assert activeUser != null;
     if (activeUser.isAdmin()){
@@ -134,7 +143,7 @@ private Socket connectionSocket;
             return null;
         } return null;
     }
-    private void logAsAdmin() throws IOException {
+    private void logAsAdmin() throws IOException, ServerException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChatAdmin.fxml"));
         Parent root = loader.load();
         AdminChatController controladorAdmin = loader.getController();
@@ -151,6 +160,7 @@ private Socket connectionSocket;
         stage.setScene(scene);
     }
     public void logOut() throws IOException {
+        //closeServer();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
         LoginController controlador = loader.getController();
@@ -159,7 +169,6 @@ private Socket connectionSocket;
         stage.setScene(scene);
         if (chatStage!=null)chatStage.close();
         activeUser = null;
-
     }
     public Connection getDatabaseConnection() throws SQLException {
         String url = "jdbc:mysql://192.168.56.101/Bank";
@@ -167,6 +176,23 @@ private Socket connectionSocket;
         String password = "alumno";
 
         return DriverManager.getConnection(url, username, password);
+    }
+    public void logSevere(Exception e) {
+        //error GRAVE
+        LOGGER.log(Level.SEVERE, e.getMessage(), e);
+    }
+
+    public void logWarning(String message) {
+        // error o advertencia
+        LOGGER.log(Level.WARNING, message);
+    }
+    public void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
     public String loadConversation(User user){
         String conversation = "";
@@ -190,5 +216,14 @@ private Socket connectionSocket;
         }
 
         return conversation;
+    }
+    public void closeServer() {
+        if (serverSocket != null && !serverSocket.isClosed()) {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                logSevere(e);
+            }
+        }
     }
 }
