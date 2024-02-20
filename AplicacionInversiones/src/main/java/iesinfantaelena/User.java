@@ -1,8 +1,10 @@
 package iesinfantaelena;
 
+import java.io.Serializable;
 import java.net.Socket;
+import java.util.regex.Pattern;
 
-public class User {
+public class User implements Serializable {
 
     private Socket clientSocket;
     private String username;
@@ -14,34 +16,82 @@ public class User {
     private String password;
     private boolean admin;
 
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
-
-    public void setClientSocket(Socket clientSocket) {
-        this.clientSocket = clientSocket;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public User(String username, Socket clientSocket) {
         this.clientSocket = clientSocket;
         this.username = username;
     }
 
     public User(String username, String name, String surname, String mail, String password,boolean admin) {
+        setUsername(username);
+        setName(name);
+        setSurname(surname);
+        setMail(mail);
+        setPassword(password);
+        setAdmin(admin);
+    }
+
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
+
+    public void setClientSocket(Socket clientSocket) {
+        if (clientSocket == null) {
+            throw new IllegalArgumentException("El socket del cliente no puede ser nulo");
+        }
+        this.clientSocket = clientSocket;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        if (username == null || username.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de usuario no puede estar vacío");
+        }
         this.username = username;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        if (surname == null || surname.trim().isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede estar vacío");
+        }
         this.surname = surname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        if (mail == null || !Pattern.matches("^[A-Za-z0-9+_.-]+@(.+)$", mail)) {
+            throw new IllegalArgumentException("El correo electrónico no es válido");
+        }
         this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        if (password == null || password.length() < 8) {
+            throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
+        }
         this.password = password;
-        this.admin=admin;
     }
 
     public boolean isAdmin() {

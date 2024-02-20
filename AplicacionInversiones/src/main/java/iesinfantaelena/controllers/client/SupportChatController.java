@@ -1,6 +1,9 @@
 package iesinfantaelena.controllers.client;
 
 import iesinfantaelena.controllers.MasterController;
+import iesinfantaelena.excepcions.DatabaseConnectionException;
+import iesinfantaelena.excepcions.ServerException;
+import iesinfantaelena.excepcions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -61,7 +64,7 @@ public class SupportChatController {
     }
 
     @FXML
-    public void sendMessage() {
+    public void sendMessage() throws UserNotFoundException, DatabaseConnectionException {
         String message = messageTextField.getText();
         saveMessage(message);
         if (!message.isEmpty()) {
@@ -76,28 +79,27 @@ public class SupportChatController {
         conversationTextArea.appendText(message + "\n");
     }
 
-    public void saveMessage(String message){
-   String username = masterController.activeUser.getUsername();
-   String newMessage = username + ": " + message + "\n";
-    try (Connection connection = masterController.getDatabaseConnection()) {
-        String updateQuery = "UPDATE users SET conversation = CONCAT(IFNULL(conversation, ''), ?) WHERE username = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-            preparedStatement.setString(1, newMessage);
-            preparedStatement.setString(2, username);
+    public void saveMessage(String message) throws UserNotFoundException, DatabaseConnectionException {
+        String username = masterController.activeUser.getUsername();
+        String newMessage = username + ": " + message + "\n";
 
-            int rowsAffected = preparedStatement.executeUpdate();
+        try (Connection connection = masterController.getDatabaseConnection()) {
+            String updateQuery = "UPDATE users SET conversation = CONCAT(IFNULL(conversation, ''), ?) WHERE username = ?";
 
-            if (rowsAffected > 0) {
-                System.out.println("Message saved successfully.");
-            } else {
-                System.out.println("No rows affected. User not found or text column is null.");
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                preparedStatement.setString(1, newMessage);
+                preparedStatement.setString(2, username);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected == 0) {
+                    masterController.showError("No se encontró el usuario.");
+                    throw new UserNotFoundException("No se encontró el usuario: " + username);
+                }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            masterController.showError("Error al conectar con la base de datos.");
+            throw new DatabaseConnectionException("Error al conectar con la base de datos", e);
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Handle database errors appropriately
     }
 }
-    }

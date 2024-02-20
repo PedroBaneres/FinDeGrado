@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -8,31 +9,52 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="contenedor_login" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.LoginController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="223.0" styleClass="login_contenedor_logo">
+      <VBox prefHeight="400.0" prefWidth="238.0" styleClass="login_contenedor_logo">
          <children>
-            <FontAwesomeIconView fill="#2043c3" fontSmoothingType="LCD" glyphName="BANK" size="30" text="" wrappingWidth="33.0" />
-            <Text fill="#1623ba" strokeType="OUTSIDE" strokeWidth="0.0" text="EasyBanking" wrappingWidth="183.0">
+            <FontAwesomeIconView fill="#2043c3" fontSmoothingType="LCD" glyphName="BANK" size="30" styleClass="login_contenedor_logo" text="" wrappingWidth="33.0" />
+            <Text fill="#1623ba" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login_contenedor_logo Text" text="EasyBanking" textAlignment="CENTER" wrappingWidth="183.0">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Text>
          </children>
       </VBox>
-      <VBox layoutX="389.0" layoutY="39.0" prefHeight="200.0" prefWidth="100.0">
+      <VBox layoutX="236.0" layoutY="16.0" prefHeight="370.0" prefWidth="353.0">
          <children>
-            <ImageView fx:id="imagen" fitHeight="191.0" fitWidth="247.0" onMouseClicked="#switchImage" pickOnBounds="true" preserveRatio="true" styleClass="contenedor_login">
+            <ImageView fx:id="imagen" fitHeight="187.0" fitWidth="161.0" nodeOrientation="INHERIT" onMouseClicked="#switchImage" pickOnBounds="true" preserveRatio="true" styleClass="contenedor_login">
                <image>
                   <Image url="@../images/icono-usuario.jpg" />
                </image>
+               <VBox.margin>
+                  <Insets left="100.0" right="20.0" />
+               </VBox.margin>
             </ImageView>
-            <TextField fx:id="txtNombre" onAction="#logIn" />
-            <PasswordField fx:id="txtPassword" onAction="#logIn" />
+
+            <Label stylesheets="@../../../../target/classes/styles/login.css" text="Usuario:">
+               <VBox.margin>
+                  <Insets left="50.0" top="15.0" />
+               </VBox.margin></Label>
+            <TextField fx:id="txtNombre" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="TextField" stylesheets="@../../../../target/classes/styles/login.css">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></TextField>
+            <Label stylesheets="@../../../../target/classes/styles/login.css" text="Contraseña:">
+               <VBox.margin>
+                  <Insets left="50.0" top="15.0" />
+               </VBox.margin></Label>
+            <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="PasswordField" stylesheets="@../../../../target/classes/styles/login.css">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin></PasswordField>
+            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logIn" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../../target/classes/styles/login.css" text="Acceder">
+               <VBox.margin>
+                  <Insets left="110.0" top="10.0" />
+               </VBox.margin></Button>
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../../target/classes/styles/login.css" text="Registrarse">
+               <VBox.margin>
+                  <Insets left="110.0" top="10.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
-
-      <Label layoutX="329.0" layoutY="235.0" text="Usuario:" />
-      <Label layoutX="319.0" layoutY="264.0" text="Contraseña:" />
-      <Button layoutX="411.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="25.0" prefWidth="149.0" text="Registrarse" />
-      <Button layoutX="411.0" layoutY="297.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="149.0" text="Acceder" />
    </children>
 </AnchorPane>

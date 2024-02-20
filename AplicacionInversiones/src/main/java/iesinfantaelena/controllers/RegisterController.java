@@ -1,5 +1,6 @@
 package iesinfantaelena.controllers;
 
+import iesinfantaelena.excepcions.DatabaseConnectionException;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -29,9 +30,9 @@ public class RegisterController {
         this.masterController = masterController;
         this.stage = masterController.getStage();
     }
-    public void register() throws IOException {
+    public void register() throws IOException, DatabaseConnectionException {
 
-       if(comprobarError(txtCorreo) || comprobarError(txtUsuario) ||
+        if(comprobarError(txtCorreo) || comprobarError(txtUsuario) ||
         comprobarError(txtPasswordCheck) || comprobarError(txtPassword) || comprobarError(txtNombreRegistro) || comprobarError(txtApellido)){
            JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
         } else if (!txtPassword.getText().equals(txtPasswordCheck.getText())){
@@ -57,12 +58,12 @@ public class RegisterController {
             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             masterController.logOut();
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al registrar usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            masterController.showError("Error al registrar el usuario. Compruebe que los campos han sido rellenados correctamente");
+            throw new DatabaseConnectionException("Error al conectar con la BBDD.");
         }
     }
     public boolean comprobarError(TextField textField){
         if (textField.getText()!=null) return textField.getText().isEmpty();
         else return true;
-}
+    }
 }

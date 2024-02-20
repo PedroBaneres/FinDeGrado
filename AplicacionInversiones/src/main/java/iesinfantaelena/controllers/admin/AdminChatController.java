@@ -27,6 +27,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+
+
 public class AdminChatController {
 
 
@@ -146,15 +148,22 @@ public class AdminChatController {
         }).start();
     }
 
-    private void handleClient(Socket clientsocket) {
+    private void handleClient(Socket clientSocket) {
         new Thread(() -> {
+            PrintWriter out = null;
+            BufferedReader in = null;
             try {
-                out = new PrintWriter(clientsocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientsocket.getInputStream()));
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String message;
                 String username = in.readLine();
+
                 User newUser = masterController.getClientFromDatabase(username);
-                connectedClients.put(newUser, clientsocket);
+                if(newUser == null){
+                    throw new UserNotFoundException("Usuario no encontrado en la BBDD. ");
+                }
+
+                connectedClients.put(newUser, clientSocket);
 
                 Platform.runLater(() -> {
                     String choice = connectedClientsChoiceBox.getValue();
@@ -165,6 +174,7 @@ public class AdminChatController {
                     connectedClientsChoiceBox.setItems(connectedClientsList);
                     connectedClientsChoiceBox.setValue(choice);
                 });
+
                 while ((message = in.readLine()) != null) {
                     String[] parts = message.split(": ", 2);
                     if (parts.length == 2 ) {
@@ -177,7 +187,21 @@ public class AdminChatController {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                masterController.logSevere(e);
+                masterController.showError("Error de conexión con el cliente.");
+            } catch (Exception e) {
+                masterController.logSevere(e);
+                masterController.showError("Error inesperado en el servidor.");
+            } finally {
+                try {
+                    if (out != null) out.close();
+                    if (in != null) in.close();
+                    if (clientSocket != null && !clientSocket.isClosed()) {
+                        clientSocket.close();
+                    }
+                } catch (IOException e) {
+                    masterController.logWarning("Error cerrando recursos. " + e.getMessage());
+                }
             }
         }).start();
     }
@@ -186,26 +210,26 @@ public class AdminChatController {
     private void saveMessage(User selectedClient, String message) throws MessageNotFoundException, ClientConnectionException{
         String username = selectedClient.getUsername();
         String newMessage =  "Admin: " + message + "\n";
-        try (Connection connection = masterController.getDatabaseConnection()) {
-            String updateQuery = "UPDATE users SET conversation = CONCAT(IFNULL(conversation, ''), ?) WHERE username = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-                preparedStatement.setString(1, newMessage);
-                preparedStatement.setString(2, username);
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Message saved successfully.");
-                } else {
-                    System.out.println("No rows affected. User not found or text column is null.");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        String updateQuery = "UPDATE users SET conversation = CONCAT(IFNULL(conversation, ''), ?) WHERE username = ?";
+
+        try (Connection connection = masterController.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
+            preparedStatement.setString(1, newMessage);
+            preparedStatement.setString(2, username);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new MessageNotFoundException("No se encontró el usuario: " + username);
             }
+            System.out.println("Mensaje guardado con éxito para el usuario: " + username);
+
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle database errors appropriately
+            masterController.showError("Error al guardar el mensaje en la BBDD.");
+            throw new ClientConnectionException("Error de conexión al intentar guardar el mensaje para el usuario: " + username, e);
         }
     }
-
     private void appendToConversation(String message) {
         conversationTextAreaAdmin.appendText(message + "\n");
     }

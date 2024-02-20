@@ -33,5 +33,5 @@ public class SettingsController {
     public void goToSupport(ActionEvent event) throws IOException{
         masterController.switchToSupportChat();
     }
-    }
+}
 

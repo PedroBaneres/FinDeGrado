@@ -1,14 +1,50 @@
 .contenedor_login {
-    -fx-background-color: #EEEEEE;
+    -fx-background-color: #f2f2f2;
 }
-.login_contenedor_logo{
+
+.login_contenedor_logo {
     -fx-alignment: center;
-    -fx-background-color: #ADD8E6;
+    -fx-background-color: #FFFFFF; /* Fondo más claro para el logo */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Sombra suave */
+    -fx-padding: 20; /* Espaciado interno */
 }
+
 .login_contenedor_logo Text {
-    -fx-font-size: 2.5em;
-    -fx-fill: rgb(128, 128, 128);
+    -fx-font-size: 24px; /* Tamaño más grande para el texto */
+    -fx-fill: #606060; /* Color de texto más oscuro para contraste */
 }
+
 .login_contenedor_logo FontAwesomeIconView {
-    -fx-fill: rgb(128, 128, 128);
+    -fx-fill: #606060; /* Icono en color oscuro para mejor visibilidad */
+}
+
+/* Estilos para los campos de texto y botones */
+.TextField, .PasswordField, .Button {
+    -fx-font-size: 14px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.Button {
+    -fx-background-color: #4e81ef; /* Color verde para los botones */
+    -fx-text-fill: #FFFFFF; /* Texto en blanco para los botones */
+    -fx-padding: 5 22 5 22; /* Espaciado interno para los botones */
+}
+#anchorPane {
+    -fx-background-color: black;
+}
+
+#anchorPane .Button {
+    -fx-background-color: #4e81ef; /* Mismo color de fondo que .Button */
+    -fx-text-fill: #FFFFFF; /* Mismo color de texto que .Button */
+    -fx-font-size: 14px; /* Mismo tamaño de fuente que .Button */
+    -fx-padding: 5 22 5 22; /* Mismo espaciado interno que .Button */
+}
+
+#anchorPane .TextField, #anchorPane .PasswordField {
+    -fx-font-size: 14px; /* Mismo tamaño de fuente que .TextField y .PasswordField */
+    -fx-border-color: #cccccc; /* Mismo color de borde que .TextField y .PasswordField */
+    -fx-border-radius: 5; /* Mismo radio de borde que .TextField y .PasswordField */
+    -fx-background-radius: 5; /* Mismo radio de fondo que .TextField y .PasswordField */
 }

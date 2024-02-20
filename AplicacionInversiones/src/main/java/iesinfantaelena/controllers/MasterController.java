@@ -5,14 +5,15 @@ import iesinfantaelena.controllers.admin.AdminChatController;
 import iesinfantaelena.controllers.client.HomepageController;
 import iesinfantaelena.User;
 import iesinfantaelena.controllers.client.SupportChatController;
+import iesinfantaelena.excepcions.DatabaseConnectionException;
 import iesinfantaelena.excepcions.ServerException;
+import iesinfantaelena.excepcions.UserNotFoundException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -36,11 +37,13 @@ public class MasterController {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
         LoginController controladorAcceso = loader.getController();
         controladorAcceso.setMasterController(this);
+
         this.stage = stage;
         stage.show();
     }
@@ -52,7 +55,7 @@ public class MasterController {
         registerController.initialize( this);
         stage.setScene(scene);
     }
-    public void switchToSupportChat() throws IOException{
+    public void switchToSupportChat() throws IOException {
         if (chatStage==null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
         Parent root = loader.load();
@@ -76,57 +79,55 @@ public class MasterController {
     public void switchToHomepage() throws IOException{
         logAsClient();
 }
-    public boolean userExists(String usuario) {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
-            String sql = "SELECT COUNT(*) AS count FROM users WHERE username = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+    public boolean userExists(String usuario) throws DatabaseConnectionException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM users WHERE username = ?")) {
+
             statement.setString(1, usuario);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            int count = resultSet.getInt("count");
-            connection.close();
-            return count > 0;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return count > 0;
+            }
             return false;
+        } catch (SQLException e) {
+            showError("Error al verificar el usuario");
+            logWarning("Error al verificar el usuario: " + e.getMessage());
+            throw new DatabaseConnectionException("Error de conexión al verificar la existencia del usuario: " + usuario, e);
         }
     }
-    public boolean verifyPassword(String username, String password) {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
-            String sql = "SELECT password FROM users WHERE username = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+    public boolean verifyPassword(String username, String password) throws DatabaseConnectionException, UserNotFoundException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+             PreparedStatement statement = connection.prepareStatement("SELECT password FROM users WHERE username = ?")) {
+
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next()) {
                 String storedPassword = resultSet.getString("password");
                 return storedPassword.equals(password);
             } else {
-                // Username not found
-                return false;
+                throw new UserNotFoundException("Usuario no encontrado: " + username);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar contraseña", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+            showError("Error al verificar la contraseña");
+            logSevere(e);
+            throw new DatabaseConnectionException("Error al conectar con la base de datos durante la verificación de contraseña", e);
         }
     }
-    public void logIn(String username) throws IOException, ServerException {
-    activeUser = getClientFromDatabase(username);
-    assert activeUser != null;
-    if (activeUser.isAdmin()){
-    logAsAdmin();} else {logAsClient();}
+    public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException {
+        activeUser = getClientFromDatabase(username);
+        assert activeUser != null;
+        if (activeUser.isAdmin()){
+        logAsAdmin();} else {logAsClient();}
 }
-    public User getClientFromDatabase(String username) {
+    public User getClientFromDatabase(String username) throws UserNotFoundException, DatabaseConnectionException {
         try {
-            // Establish connection to the database
             Connection connection = getDatabaseConnection();
-            // Prepare SQL statement to select client information based on the username
             String sql = "SELECT * FROM users WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
 
-            // Execute the query
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -136,12 +137,14 @@ public class MasterController {
                 String password = resultSet.getString("password");
                 boolean admin = resultSet.getBoolean("admin");
                 return new User(username, name, surname, mail, password, admin);
+            } else {
+                throw new UserNotFoundException("El usuario no se ha podido encontrar " + username);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception appropriately (e.g., log it, show an error message)
-            return null;
-        } return null;
+            showError("La conexión con la BBDD ha fallado");
+            logSevere(e);
+            throw new DatabaseConnectionException("La conexión con la BBDD ha fallado. " + e.getMessage());
+        }
     }
     private void logAsAdmin() throws IOException, ServerException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChatAdmin.fxml"));
@@ -165,9 +168,10 @@ public class MasterController {
         Parent root = loader.load();
         LoginController controlador = loader.getController();
         controlador.setMasterController(this);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        if (chatStage!=null)chatStage.close();
+        if(chatStage!=null)chatStage.close();
         activeUser = null;
     }
     public Connection getDatabaseConnection() throws SQLException {
@@ -214,7 +218,6 @@ public class MasterController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return conversation;
     }
     public void closeServer() {
