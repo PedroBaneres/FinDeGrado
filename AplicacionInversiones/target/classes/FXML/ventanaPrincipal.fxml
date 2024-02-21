@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
    <children>
       <VBox layoutX="65.0" layoutY="208.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="237.0" prefWidth="518.0" />
       <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
-      <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="MenuButton">
+      <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" stylesheets="@../../../src/main/resources/styles/registro.css" text="MenuButton">
         <items>
           <MenuItem mnemonicParsing="false" text="Cartera" />
           <MenuItem mnemonicParsing="false" onAction="#goToSettings" text="Ajustes" />

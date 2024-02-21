@@ -1,4 +1,4 @@
-package iesinfantaelena.excepcions;
+package iesinfantaelena.exceptions;
 
 public class UserNotFoundException extends Exception{
     public UserNotFoundException(String message, Throwable t){

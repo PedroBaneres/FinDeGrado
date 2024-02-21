@@ -74,7 +74,7 @@ public class User implements Serializable {
     }
 
     public void setMail(String mail) {
-        if (mail == null || !Pattern.matches("^[A-Za-z0-9+_.-]+@(.+)$", mail)) {
+        if (mail == null ) {
             throw new IllegalArgumentException("El correo electrónico no es válido");
         }
         this.mail = mail;
@@ -85,8 +85,8 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        if (password == null || password.length() < 8) {
-            throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
+        if (password == null) {
+            throw new IllegalArgumentException("La contraseña no es válida");
         }
         this.password = password;
     }

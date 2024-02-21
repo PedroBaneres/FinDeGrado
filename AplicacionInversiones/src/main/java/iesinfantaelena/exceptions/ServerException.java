@@ -1,4 +1,4 @@
-package iesinfantaelena.excepcions;
+package iesinfantaelena.exceptions;
 
 public class ServerException extends Exception{
     public ServerException(String message){

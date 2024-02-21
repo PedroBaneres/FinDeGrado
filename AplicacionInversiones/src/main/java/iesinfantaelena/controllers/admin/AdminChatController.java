@@ -2,10 +2,10 @@ package iesinfantaelena.controllers.admin;
 
 import iesinfantaelena.controllers.MasterController;
 import iesinfantaelena.User;
-import iesinfantaelena.excepcions.ClientConnectionException;
-import iesinfantaelena.excepcions.MessageNotFoundException;
-import iesinfantaelena.excepcions.ServerException;
-import iesinfantaelena.excepcions.UserNotFoundException;
+import iesinfantaelena.exceptions.ClientConnectionException;
+import iesinfantaelena.exceptions.MessageNotFoundException;
+import iesinfantaelena.exceptions.ServerException;
+import iesinfantaelena.exceptions.UserNotFoundException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,8 +25,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Logger;
-
 
 
 public class AdminChatController {

@@ -1,4 +1,4 @@
-package iesinfantaelena.excepcions;
+package iesinfantaelena.exceptions;
 
 public class MessageNotFoundException extends Exception{
     public MessageNotFoundException(String message, Throwable t){

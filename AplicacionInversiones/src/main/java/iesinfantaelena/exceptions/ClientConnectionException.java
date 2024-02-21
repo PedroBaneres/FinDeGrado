@@ -1,4 +1,4 @@
-package iesinfantaelena.excepcions;
+package iesinfantaelena.exceptions;
 
 public class ClientConnectionException extends Exception{
     public ClientConnectionException(String message, Throwable t){

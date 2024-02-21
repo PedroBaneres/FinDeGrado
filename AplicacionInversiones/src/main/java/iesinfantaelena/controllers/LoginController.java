@@ -1,8 +1,8 @@
 package iesinfantaelena.controllers;
 
-import iesinfantaelena.excepcions.DatabaseConnectionException;
-import iesinfantaelena.excepcions.ServerException;
-import iesinfantaelena.excepcions.UserNotFoundException;
+import iesinfantaelena.exceptions.DatabaseConnectionException;
+import iesinfantaelena.exceptions.ServerException;
+import iesinfantaelena.exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

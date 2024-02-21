@@ -1,10 +1,8 @@
 package iesinfantaelena.controllers.client;
 
 import iesinfantaelena.controllers.MasterController;
-import iesinfantaelena.excepcions.DatabaseConnectionException;
-import iesinfantaelena.excepcions.ServerException;
-import iesinfantaelena.excepcions.UserNotFoundException;
-import javafx.event.ActionEvent;
+import iesinfantaelena.exceptions.DatabaseConnectionException;
+import iesinfantaelena.exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
