@@ -1,0 +1,60 @@
+#menu {
+    -fx-background-radius: 50px;
+    -fx-shape: " ";
+    -fx-background-color: transparent;
+}
+
+.balance-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.greeting-text {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #eeeeee;
+}
+
+.line-chart {
+    -fx-background-color: #f5f5f5;
+}
+.chart-series-line {
+    -fx-stroke: #FF0000; /* This sets the line color to red */
+    -fx-stroke-width: 2px; /* This sets the width of the line */
+}
+
+/* Style for the plot background */
+.chart-plot-background {
+    -fx-background-color: transparent; /* This makes the plot background transparent */
+}
+
+/* Style for the chart content background */
+.chart-content {
+    -fx-background-color: transparent; /* This makes the chart content background transparent */
+}
+
+/* Style for the horizontal grid lines */
+.chart-horizontal-grid-lines {
+    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
+    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+}
+
+/* Style for the vertical grid lines */
+.chart-vertical-grid-lines {
+    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
+    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+}

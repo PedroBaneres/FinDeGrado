@@ -5,14 +5,12 @@ import java.net.Socket;
 import java.util.regex.Pattern;
 
 public class User implements Serializable {
-
     private Socket clientSocket;
     private String username;
 
     private String name;
     private String surname;
     private String mail;
-
     private String password;
     private boolean admin;
 
@@ -71,7 +69,6 @@ public class User implements Serializable {
         }
         this.surname = surname;
     }
-
     public String getMail() {
         return mail;
     }

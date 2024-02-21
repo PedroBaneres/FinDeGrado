@@ -2,6 +2,4 @@
 - Cerrar Sockets al cerrar sesión y al darle a la X
 - Eliminar clientes que se desconecten de la lista de clientes conectados (admin)
 - Añadir funcionalidad de cambiar ajustes en la ventana ajusts (que se cambien en la BDD)
-- Guardar mensajes en BDD y cargarlos cuando se reconecte, detectar que no es un cliente nuevo (HECHO)
-- Chat de admin que no muestre todos los mensajes recibidos, solo del seleccionado (HECHO)
 - Añadir funcionalidades banco (ingresar dinero, transferir etc...) con BDD

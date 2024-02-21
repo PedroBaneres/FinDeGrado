@@ -1,0 +1,40 @@
+.header {
+    -fx-font-size: 20px;
+    -fx-background-color: #ffffff;
+    -fx-alignment: center-right;
+    -fx-padding: 10px;
+}
+
+.transaction-list {
+    -fx-background-color: #f0f0f0;
+}
+
+.transaction-list .list-cell {
+    -fx-padding: 10px;
+    -fx-border-color: #d0d0d0;
+    -fx-border-insets: 0;
+    -fx-border-width: 0 0 1 0;
+}
+.card-container {
+    -fx-alignment: center; /* Asegura que el label esté centrado sobre la imagen */
+}
+
+.balance {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff; /* Un color que contraste con tu imagen */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Opcional: Añade sombra para mejorar la legibilidad */
+}
+.labelTransactions {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+.back-button {
+    -fx-padding: 10px;
+    -fx-background-color: transparent; /* o cualquier otro color de fondo */
+}
+
+.back-button:hover {
+    -fx-background-color: #f0f0f0; /* o cualquier otro color al pasar el mouse */
+}
