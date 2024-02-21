@@ -2,9 +2,9 @@
     -fx-background-color: linear-gradient(to bottom, #2c3e50, #3498db); /* Gradiente de colores */
 }
 
-#anchorPane .Button {
-    -fx-background-color: #4e81ef; /* Mismo color de fondo que .Button */
-    -fx-text-fill: #FFFFFF; /* Mismo color de texto que .Button */
+#Button {
+    -fx-background-color: #ffffff; /* Mismo color de fondo que .Button */
+    -fx-text-fill: #0a0a0a; /* Mismo color de texto que .Button */
     -fx-font-size: 14px; /* Mismo tamaño de fuente que .Button */
     -fx-padding: 5 22 5 22; /* Mismo espaciado interno que .Button */
 }
@@ -14,10 +14,4 @@
     -fx-border-color: #cccccc; /* Mismo color de borde que .TextField y .PasswordField */
     -fx-border-radius: 5; /* Mismo radio de borde que .TextField y .PasswordField */
     -fx-background-radius: 5; /* Mismo radio de fondo que .TextField y .PasswordField */
-}
-.labelRegistro {
-    -fx-font-size: 18px; /* Tamaño de fuente más grande */
-    -fx-font-weight: bold; /* Fuente en negrita */
-    -fx-text-fill: #4e81ef; /* Color de texto azul para resaltar */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5); /* Efecto de sombra */
 }

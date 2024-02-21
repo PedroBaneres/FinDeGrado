@@ -12,9 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         MasterController masterController = new MasterController();
-        AccountManager transferenciaManager = new AccountManager();
-        transferenciaManager.transfer("ES-000001","ES-000002",20,"Prueba",masterController.getDatabaseConnection());
-        //masterController.start(stage);
+        //AccountManager transferenciaManager = new AccountManager();
+        //transferenciaManager.transfer("ES-000001","ES-000002",20,"Prueba",masterController.getDatabaseConnection());
+        masterController.start(stage);
     }
 
     public static void main(String[] args) {

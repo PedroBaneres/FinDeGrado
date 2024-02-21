@@ -1,23 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="641.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
-   <children>
-      <VBox layoutX="65.0" layoutY="208.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="237.0" prefWidth="518.0" />
-      <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" />
-      <MenuButton layoutX="10.0" layoutY="54.0" mnemonicParsing="false" stylesheets="@../../../src/main/resources/styles/registro.css" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Cartera" />
-          <MenuItem mnemonicParsing="false" onAction="#goToSettings" text="Ajustes" />
-            <MenuItem mnemonicParsing="false" onAction="#goToSupport" text="Soporte" />
-            <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
-        </items>
-      </MenuButton>
-   </children>
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
+<Pane id="pane" prefHeight="549.0" prefWidth="641.0" stylesheets="@../styles/principal.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
+    <children>
+        <!-- Integration of the user greeting and balance -->
+        <VBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="641.0" spacing="10">
+            <HBox alignment="CENTER" spacing="10">
+                <Label fx:id="labelNombre" styleClass="greeting-text" text="Hi, [Nombre del Cliente]!" />
+                <Label fx:id="balanceLabel" styleClass="balance-text" text="€ 3.210,00" />
+            </HBox>
+            <!-- Existing MenuButton from your FXML -->
+            <MenuButton id="menu" mnemonicParsing="false" styleClass="menu-button">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Cartera" />
+                    <MenuItem mnemonicParsing="false" onAction="#goToSettings" text="Ajustes" />
+                    <MenuItem mnemonicParsing="false" onAction="#goToSupport" text="Soporte" />
+                    <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
+                </items>
+                <graphic>
+                    <FontAwesomeIconView glyphName="USER" />
+                </graphic>
+            </MenuButton>
+            <!-- Example LineChart integration -->
+            <TabPane fx:id="tabPane" styleClass="chart-tab-pane" tabClosingPolicy="UNAVAILABLE">
+                <Tab text="Last Week">
+                    <AnchorPane>
+                        <LineChart fx:id="weekLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
+                            <xAxis>
+                                <CategoryAxis label="Day" fx:id="xAxis" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="yAxis" label="Amount" />
+                            </yAxis>
+                        </LineChart>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Last Month" />
+                <Tab text="All Time" />
+            </TabPane>
+         <ImageView fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../target/classes/images/tarjeta.png" />
+            </image>
+         </ImageView>
+        </VBox>
+        <!-- Your existing VBox and other elements here -->
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
 </Pane>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="251.0" style="-fx-background-color: gainsboro; -fx-border-color: black; -fx-border-width: 8; " xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.SupportChatController">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="251.0" stylesheets="@../styles/chat.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.SupportChatController">
    <children>
       <TextArea fx:id="conversationTextArea" editable="false" layoutX="27.0" layoutY="51.0" prefHeight="333.0" prefWidth="198.0" />
       <TextField fx:id="messageTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="410.0" onAction="#sendMessage" prefHeight="37.0" prefWidth="198.0" promptText="Escribanos su problema" />
+      <Label layoutX="80.0" layoutY="26.0" text="Chat con soporte" textFill="WHITE" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

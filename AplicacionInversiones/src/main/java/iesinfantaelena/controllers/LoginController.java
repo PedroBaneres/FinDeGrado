@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
     private MasterController masterController;
@@ -28,7 +29,7 @@ public class LoginController {
         this.masterController = masterController;
     }
     @FXML
-    void logIn(ActionEvent event) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException {
+    void logIn(ActionEvent event) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException, SQLException {
         String username = txtNombre.getText();
         if (!masterController.userExists(username)) {
             JOptionPane.showMessageDialog(null, "El nombre de usuario no existe. Por favor, verifique que esté escrito correctamente o regístrese si aún no dispone de una cuenta.", "Error", JOptionPane.WARNING_MESSAGE);

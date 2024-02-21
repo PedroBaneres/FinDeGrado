@@ -76,7 +76,7 @@ public class MasterController {
             stage.setScene(scene);
             settingsController.initialize(this);
         }
-    public void switchToHomepage() throws IOException{
+    public void switchToHomepage() throws IOException, SQLException {
         logAsClient();
 }
     public boolean userExists(String usuario) throws DatabaseConnectionException {
@@ -115,7 +115,7 @@ public class MasterController {
             throw new DatabaseConnectionException("Error al conectar con la base de datos durante la verificación de contraseña", e);
         }
     }
-    public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException {
+    public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException, SQLException {
         activeUser = getClientFromDatabase(username);
         assert activeUser != null;
         if (activeUser.isAdmin()){
@@ -154,7 +154,7 @@ public class MasterController {
         controladorAdmin.initialize(this);
         stage.setScene(scene);
     }
-    private void logAsClient() throws IOException {
+    private void logAsClient() throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaPrincipal.fxml"));
         Parent root = loader.load();
         HomepageController homepageController = loader.getController();
@@ -229,4 +229,5 @@ public class MasterController {
             }
         }
     }
+
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SettingsController {
     @FXML
@@ -23,7 +24,7 @@ public class SettingsController {
         this.masterController = masterController;
         this.stage = masterController.getStage();
     }
-    public void goToHomepage(ActionEvent event) throws IOException {
+    public void goToHomepage(ActionEvent event) throws IOException, SQLException {
         masterController.switchToHomepage();
     }
     public void logOut(ActionEvent event) throws IOException {

@@ -2,7 +2,10 @@ package iesinfantaelena;
 
 import java.io.Serializable;
 import java.net.Socket;
-import java.util.regex.Pattern;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class User implements Serializable {
     private Socket clientSocket;
@@ -98,4 +101,21 @@ public class User implements Serializable {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-}
+    public double getTotalBalance(Connection connection) throws SQLException {
+            double totalBalance = 0.0;
+            String query = "SELECT balance FROM Bank.accounts WHERE username = ?";
+
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, username);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    totalBalance += resultSet.getDouble("balance");
+                }
+            }
+
+        return totalBalance;
+        }
+
+    }
+
