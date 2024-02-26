@@ -27,7 +27,7 @@ create table accounts
     IBAN     varchar(50)    not null
         primary key,
     username varchar(50)    null,
-    saldo    decimal(10, 2) null,
+    balance    decimal(10, 2) null,
     constraint accounts_ibfk_1
         foreign key (username) references users (username)
 );
