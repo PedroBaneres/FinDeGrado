@@ -46,7 +46,7 @@
                                 <CategoryAxis label="Day" fx:id="xAxis" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis fx:id="yAxis" label="Amount" />
+                                <NumberAxis fx:id="yAxis" label="Balance" />
                             </yAxis>
                         </LineChart>
                     </AnchorPane>

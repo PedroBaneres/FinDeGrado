@@ -9,6 +9,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class HomepageController {
@@ -37,7 +38,25 @@ public class HomepageController {
         labelNombre.setText("Bienvenido " + masterController.activeUser.getUsername());
         this.chartManager = new ChartManager();
         balanceLabel.setText(masterController.activeUser.getTotalBalance(masterController.getDatabaseConnection()) + "€");
-        XYChart.Series<String, Number> accountBalance = chartManager.getAccountBalanceDataLastWeek(masterController.getDatabaseConnection(),masterController.activeUser.getUsername());
         this.masterController= masterController;
+        populateLastWeekChart();
+
+    }
+    private void populateLastWeekChart() {
+        try {
+            // Get database connection
+            Connection connection = masterController.getDatabaseConnection();
+
+            // Get username of the logged-in user
+            String username = masterController.activeUser.getUsername();
+
+            // Get account balance data for the last week
+            XYChart.Series<String, Number> series = chartManager.getAccountBalanceDataLastWeek(connection, username);
+
+            // Add the series to the chart
+            weekLineChart.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

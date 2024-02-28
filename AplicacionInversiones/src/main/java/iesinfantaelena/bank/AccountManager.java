@@ -17,13 +17,16 @@ public class AccountManager {
             addStatement.setString(2, IBAN);
             addStatement.executeUpdate();
 
+            Double BalanceAT = fetchBalance(IBAN, connection);
+
             // Insert the transaction into the transactions table
-            String insertSql = "INSERT INTO transactions (source_IBAN, transaction_date, amount, description) VALUES (?, ?, ?, ?)";
+            String insertSql = "INSERT INTO transactions (source_IBAN, transaction_date, amount, description, source_IBAN_balanceAT) VALUES (?, ?, ?, ?, ? )";
             PreparedStatement insertStatement = connection.prepareStatement(insertSql);
-            insertStatement.setString(1, IBAN);
+            insertStatement.setString(1, IBAN); // Source IBAN
             insertStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             insertStatement.setDouble(3, amount);
             insertStatement.setString(4, "top up");
+            insertStatement.setDouble(5, BalanceAT); // BalanceAT of the source IBAN
             insertStatement.executeUpdate();
 
             // Commit the transaction
@@ -39,6 +42,7 @@ public class AccountManager {
         }
     }
 
+
     // Method to withdraw money from an account and record the transaction
     public void withdrawMoney(String IBAN, double amount, Connection connection) throws SQLException {
         try {
@@ -50,9 +54,10 @@ public class AccountManager {
             checkBalanceStatement.setString(1, IBAN);
             ResultSet resultSet = checkBalanceStatement.executeQuery();
             if (resultSet.next()) {
-                double saldo = resultSet.getDouble("saldo");
+                double saldo = resultSet.getDouble("balance");
                 if (saldo < amount) {
                     throw new SQLException("Insufficient balance");
+
                 }
             }
 
@@ -63,13 +68,15 @@ public class AccountManager {
             deductStatement.setString(2, IBAN);
             deductStatement.executeUpdate();
 
+            Double BalanceAT = fetchBalance(IBAN,connection);
             // Insert the transaction into the transactions table
-            String insertSql = "INSERT INTO transactions (source_IBAN, transaction_date, amount, description) VALUES (?, ?, ?, ?)";
+            String insertSql = "INSERT INTO transactions (source_IBAN, transaction_date, amount, description,source_IBAN_balanceAT) VALUES (?, ?, ?, ?,?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertSql);
             insertStatement.setString(1, IBAN);
             insertStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-            insertStatement.setDouble(3, -amount); // Negative amount to represent withdrawal
+            insertStatement.setDouble(3, amount); // Negative amount to represent withdrawal
             insertStatement.setString(4, "Withdrawal");
+            insertStatement.setDouble(5,BalanceAT);
             insertStatement.executeUpdate();
 
             // Commit the transaction
@@ -86,11 +93,14 @@ public class AccountManager {
     }
 
 
-
     // Method to perform a transfer between two accounts and record the transaction
     public void transfer(String sourceIBAN, String destinationIBAN, double amount, String description, Connection connection) throws SQLException {
         try {
             connection.setAutoCommit(false);
+
+            // Fetch balances before the transaction
+            double sourceBalanceBefore = fetchBalance(sourceIBAN, connection);
+            double destinationBalanceBefore = fetchBalance(destinationIBAN, connection);
 
             // Deduct amount from source account
             String deductSql = "UPDATE accounts SET balance = balance - ? WHERE IBAN = ?";
@@ -107,13 +117,15 @@ public class AccountManager {
             addStatement.executeUpdate();
 
             // Insert the transaction into the transactions table
-            String insertSql = "INSERT INTO transactions (source_IBAN, destination_IBAN, transaction_date, amount, description) VALUES (?, ?, ?, ?, ?)";
+            String insertSql = "INSERT INTO transactions (source_IBAN, destination_IBAN, transaction_date, amount, description, source_IBAN_balanceAT, destination_IBAN_balanceAT) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertSql);
             insertStatement.setString(1, sourceIBAN);
             insertStatement.setString(2, destinationIBAN);
             insertStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             insertStatement.setDouble(4, amount);
             insertStatement.setString(5, description);
+            insertStatement.setDouble(6, sourceBalanceBefore - amount); // Source account balance after transaction
+            insertStatement.setDouble(7, destinationBalanceBefore + amount); // Destination account balance after transaction
             insertStatement.executeUpdate();
 
             // Commit the transaction
@@ -126,6 +138,18 @@ public class AccountManager {
             connection.rollback();
             connection.setAutoCommit(true);
             throw e;
+        }
+    }
+
+    private double fetchBalance(String IBAN, Connection connection) throws SQLException {
+        String sql = "SELECT balance FROM accounts WHERE IBAN = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, IBAN);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getDouble("balance");
+        } else {
+            throw new SQLException("Account with IBAN " + IBAN + " not found.");
         }
     }
 }
