@@ -80,9 +80,8 @@ public class MasterController {
         logAsClient();
 }
     public boolean userExists(String usuario) throws DatabaseConnectionException {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
+        try (Connection connection = getDatabaseConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS count FROM users WHERE username = ?")) {
-
             statement.setString(1, usuario);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -96,26 +95,28 @@ public class MasterController {
             throw new DatabaseConnectionException("Error de conexión al verificar la existencia del usuario: " + usuario, e);
         }
     }
-    public boolean verifyPassword(String username, String password) throws DatabaseConnectionException, UserNotFoundException {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.56.101/Bank", "admin00", "alumno");
-             PreparedStatement statement = connection.prepareStatement("SELECT password FROM users WHERE username = ?")) {
 
-            statement.setString(1, username);
-            ResultSet resultSet = statement.executeQuery();
+        public boolean verifyPassword(String username, String password) throws DatabaseConnectionException, UserNotFoundException {
+            try (Connection connection = getDatabaseConnection();
+                 PreparedStatement statement = connection.prepareStatement("SELECT password FROM users WHERE username = ?")) {
 
-            if (resultSet.next()) {
-                String storedPassword = resultSet.getString("password");
-                return storedPassword.equals(password);
-            } else {
-                throw new UserNotFoundException("Usuario no encontrado: " + username);
+                statement.setString(1, username);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    String storedPassword = resultSet.getString("password");
+                    return storedPassword.equals(password);
+                } else {
+                    throw new UserNotFoundException("Usuario no encontrado: " + username);
+                }
+            } catch (SQLException e) {
+                showError("Error al verificar la contraseña");
+                logSevere(e);
+                throw new DatabaseConnectionException("Error al conectar con la base de datos durante la verificación de contraseña", e);
             }
-        } catch (SQLException e) {
-            showError("Error al verificar la contraseña");
-            logSevere(e);
-            throw new DatabaseConnectionException("Error al conectar con la base de datos durante la verificación de contraseña", e);
         }
-    }
-    public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException, SQLException {
+
+        public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException, SQLException {
         activeUser = getClientFromDatabase(username);
         assert activeUser != null;
         if (activeUser.isAdmin()){
