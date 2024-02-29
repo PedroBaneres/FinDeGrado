@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" stylesheets="@../styles/registro.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.RegisterController">
+<AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" stylesheets="@../styles/registro.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.RegisterController">
    <children>
-      <Button id="Button" layoutX="119.0" layoutY="292.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="195.0" styleClass="Button" text="Registrarse" />
-      <Label layoutX="101.0" layoutY="69.0" text="Nombre:" />
-      <Label layoutX="101.0" layoutY="103.0" text="Apellido:" />
-      <Label layoutX="103.0" layoutY="137.0" text="Usuario:" />
-      <Label layoutX="100.0" layoutY="171.0" text="Correo:" />
-      <Label layoutX="89.0" layoutY="209.0" text="Contraseña" />
-      <Label layoutX="53.0" layoutY="248.0" text="Repita Contraseña:" />
+      <Button id="Button" layoutX="135.0" layoutY="290.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="195.0" styleClass="#button" stylesheets="@../styles/registro.css" text="Registrarse" />
+      <Label layoutX="101.0" layoutY="69.0" text="Nombre:" textFill="WHITE" />
+      <Label layoutX="101.0" layoutY="103.0" text="Apellido:" textFill="WHITE" />
+      <Label layoutX="103.0" layoutY="137.0" text="Usuario:" textFill="#f7f3f3" />
+      <Label layoutX="100.0" layoutY="171.0" text="Correo:" textFill="#fcfbfb" />
+      <Label layoutX="89.0" layoutY="209.0" text="Contraseña" textFill="#f4f2f2" />
+      <Label layoutX="53.0" layoutY="248.0" text="Repita Contraseña:" textFill="#fcf8f8" />
       <TextField fx:id="txtNombreRegistro" layoutX="158.0" layoutY="65.0" onAction="#register" />
       <TextField fx:id="txtApellido" layoutX="158.0" layoutY="99.0" onAction="#register" />
       <TextField fx:id="txtUsuario" layoutX="158.0" layoutY="133.0" onAction="#register" />
       <TextField fx:id="txtCorreo" layoutX="158.0" layoutY="167.0" onAction="#register" />
       <PasswordField fx:id="txtPassword" layoutX="158.0" layoutY="205.0" onAction="#register" />
       <PasswordField fx:id="txtPasswordCheck" layoutX="158.0" layoutY="244.0" onAction="#register" />
+      <Label id="welcomeLabel" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="18.0" prefWidth="410.0" text="Bienvenido a EasyBanking!!" textOverrun="LEADING_WORD_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="1.0" />
+         </font>
+      </Label>
+      <Label id="welcomeLabel2" alignment="CENTER" layoutX="27.0" layoutY="44.0" prefHeight="8.0" prefWidth="410.0" stylesheets="@../styles/registro.css" text="Crea una cuenta completamente gratuita" />
    </children>
 </AnchorPane>

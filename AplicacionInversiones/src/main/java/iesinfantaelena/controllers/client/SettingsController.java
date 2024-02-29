@@ -23,6 +23,12 @@ public class SettingsController {
     public void initialize(MasterController masterController) {
         this.masterController = masterController;
         this.stage = masterController.getStage();
+        updateUserName();
+    }
+    private void updateUserName() {
+        if (masterController.activeUser != null) { // Asegúrate de que activeUser no es nulo
+            labelNombre.setText("Bienvenido " + masterController.activeUser.getUsername());
+        }
     }
     public void goToHomepage(ActionEvent event) throws IOException, SQLException {
         masterController.switchToHomepage();

@@ -5,6 +5,7 @@ import iesinfantaelena.controllers.admin.AdminChatController;
 import iesinfantaelena.controllers.client.HomepageController;
 import iesinfantaelena.User;
 import iesinfantaelena.controllers.client.SupportChatController;
+import iesinfantaelena.controllers.client.TransactionsController;
 import iesinfantaelena.exceptions.DatabaseConnectionException;
 import iesinfantaelena.exceptions.ServerException;
 import iesinfantaelena.exceptions.UserNotFoundException;
@@ -161,6 +162,14 @@ public class MasterController {
         HomepageController homepageController = loader.getController();
         Scene scene = new Scene(root);
         homepageController.initialize(this);
+        stage.setScene(scene);
+    }
+    public void switchToTransactions() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaTransacciones.fxml"));
+        Parent root = loader.load();
+        TransactionsController transactionsController = loader.getController();
+        Scene scene = new Scene(root);
+        transactionsController.setMasterController(this);
         stage.setScene(scene);
     }
     public void logOut() throws IOException {

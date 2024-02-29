@@ -46,7 +46,7 @@
                                 <CategoryAxis label="Day" fx:id="xAxis" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis fx:id="yAxis" label="Balance" />
+                                <NumberAxis fx:id="yAxis" label="Amount" />
                             </yAxis>
                         </LineChart>
                     </AnchorPane>
@@ -54,9 +54,9 @@
                 <Tab text="Last Month" />
                 <Tab text="All Time" />
             </TabPane>
-         <ImageView fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="imageView" fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../target/classes/images/tarjeta.png" />
+               <Image url="@../../../target/classes/images/tarjeta.jpg"/>
             </image>
          </ImageView>
         </VBox>

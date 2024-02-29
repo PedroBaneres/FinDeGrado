@@ -8,6 +8,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,6 +22,9 @@ public class HomepageController {
     private Label balanceLabel;
     @FXML
     private LineChart<String, Number> weekLineChart;
+    
+    @FXML
+    private ImageView imageView;
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         masterController.logOut();
@@ -40,8 +44,17 @@ public class HomepageController {
         balanceLabel.setText(masterController.activeUser.getTotalBalance(masterController.getDatabaseConnection()) + "€");
         this.masterController= masterController;
         populateLastWeekChart();
-
     }
+    public void initialize() {
+        imageView.setOnMouseClicked(event -> {
+            try {
+                masterController.switchToTransactions();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     private void populateLastWeekChart() {
         try {
             // Get database connection

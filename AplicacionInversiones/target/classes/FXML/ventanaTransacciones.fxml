@@ -11,13 +11,13 @@
 <?import javafx.scene.text.Font?>
 
 <VBox id="header" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.TransactionsController">
-   <FontAwesomeIconView id="backButton" glyphName="ARROW_LEFT" textAlignment="CENTER" wrappingWidth="20.0">
+   <FontAwesomeIconView fx:id="backButton" id="backButton" glyphName="ARROW_LEFT" textAlignment="CENTER" wrappingWidth="20.0">
       <font>
          <Font size="19.0" />
       </font></FontAwesomeIconView>
     <StackPane minWidth="-Infinity" prefHeight="84.0" prefWidth="208.0" styleClass="card-container">
         <ImageView fitHeight="117.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../../target/classes/images/tarjeta.png" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
+            <Image url="@../../../target/classes/images/tarjeta.jpg" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
         </ImageView>
         <Label prefHeight="85.0" prefWidth="176.0" styleClass="balance" stylesheets="@../styles/transactions.css" text="€ 3.210,00">
          <opaqueInsets>
