@@ -6,8 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
+
+    public List<String> ibans;
     private Socket clientSocket;
     private String username;
 
@@ -29,6 +33,7 @@ public class User implements Serializable {
         setMail(mail);
         setPassword(password);
         setAdmin(admin);
+
     }
 
     public Socket getClientSocket() {
@@ -117,5 +122,30 @@ public class User implements Serializable {
         return totalBalance;
         }
 
+
+        public void setIBANs(Connection connection) throws SQLException {
+        List<String> ibans = new ArrayList<>();
+        String sql = "SELECT IBAN FROM accounts WHERE username = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, username);
+
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    String iban = resultSet.getString("IBAN");
+
+                    ibans.add(iban);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+        this.ibans = ibans;
     }
+
+}
 

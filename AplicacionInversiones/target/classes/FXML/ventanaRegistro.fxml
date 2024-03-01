@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" stylesheets="@../styles/registro.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.RegisterController">
+
    <children>
-      <Button id="Button" layoutX="135.0" layoutY="290.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="195.0" styleClass="#button" stylesheets="@../styles/registro.css" text="Registrarse" />
+      <FontAwesomeIconView fx:id="iconBack" fill="#fcf8f8" glyphName="ARROW_LEFT" layoutX="37.0" layoutY="36.0" onMouseClicked="#handleBackToLogin" size="20" textAlignment="CENTER" wrappingWidth="54.0" />
+      <Button id="Button" layoutX="135.0" layoutY="290.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="195.0" style="-fx-cursor: hand;" styleClass="#button" stylesheets="@../styles/registro.css" text="Registrarse" />
       <Label layoutX="101.0" layoutY="69.0" text="Nombre:" textFill="WHITE" />
       <Label layoutX="101.0" layoutY="103.0" text="Apellido:" textFill="WHITE" />
       <Label layoutX="103.0" layoutY="137.0" text="Usuario:" textFill="#f7f3f3" />
@@ -19,11 +22,12 @@
       <TextField fx:id="txtCorreo" layoutX="158.0" layoutY="167.0" onAction="#register" />
       <PasswordField fx:id="txtPassword" layoutX="158.0" layoutY="205.0" onAction="#register" />
       <PasswordField fx:id="txtPasswordCheck" layoutX="158.0" layoutY="244.0" onAction="#register" />
-      <Label id="welcomeLabel" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="18.0" prefWidth="410.0" text="Bienvenido a EasyBanking!!" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Label id="welcomeLabel" alignment="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="30.0" prefWidth="282.0" text="Bienvenido a EasyBanking!!" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="System Bold" size="1.0" />
          </font>
       </Label>
       <Label id="welcomeLabel2" alignment="CENTER" layoutX="27.0" layoutY="44.0" prefHeight="8.0" prefWidth="410.0" stylesheets="@../styles/registro.css" text="Crea una cuenta completamente gratuita" />
    </children>
+
 </AnchorPane>

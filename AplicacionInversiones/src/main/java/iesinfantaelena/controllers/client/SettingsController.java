@@ -38,7 +38,7 @@ public class SettingsController {
     }
     @FXML
     public void goToSupport(ActionEvent event) throws IOException{
-        masterController.switchToSupportChat();
+        masterController.showSupportChat();
     }
 }
 

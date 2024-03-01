@@ -1,7 +1,11 @@
 package iesinfantaelena.controllers;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import iesinfantaelena.exceptions.DatabaseConnectionException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,10 +30,12 @@ public class RegisterController {
     private PasswordField txtPassword;
     @FXML
     private PasswordField txtPasswordCheck;
-
+    @FXML
+    private FontAwesomeIconView iconBack;
     public void initialize(MasterController masterController) {
         this.masterController = masterController;
         this.stage = masterController.getStage();
+
     }
     public void register() throws IOException, DatabaseConnectionException {
 
@@ -76,4 +82,20 @@ public class RegisterController {
         if (textField.getText()!=null) return textField.getText().isEmpty();
         else return true;
     }
+
+    public void handleBackToLogin() throws IOException {
+        // Cargar la vista de login
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
+        Parent root = loader.load();
+
+        // Obtener el controlador de la vista de login y pasarle la referencia al controlador maestro si es necesario
+        LoginController loginController = loader.getController();
+        loginController.setMasterController(masterController);
+
+        // Configurar la escena y mostrarla
+        Scene loginScene = new Scene(root);
+        stage.setScene(loginScene);
+        stage.show();
+    }
+
 }

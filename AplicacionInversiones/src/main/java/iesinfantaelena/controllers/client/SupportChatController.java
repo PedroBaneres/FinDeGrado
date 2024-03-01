@@ -37,7 +37,7 @@ public class SupportChatController {
     private PrintWriter out;
     private BufferedReader in;
 
-    public void initialize(Stage stage, MasterController masterController) {
+    public void initialize(MasterController masterController) {
         this.masterController = masterController;
         try {
             socket = new Socket("localhost", 6000);

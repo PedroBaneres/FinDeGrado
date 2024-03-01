@@ -26,7 +26,7 @@
                 <Label fx:id="balanceLabel" styleClass="balance-text" text="€ 3.210,00" />
             </HBox>
             <!-- Existing MenuButton from your FXML -->
-            <MenuButton id="menu" mnemonicParsing="false" styleClass="menu-button">
+            <MenuButton id="menu" mnemonicParsing="false" styleClass="menu-button" style="-fx-cursor: hand;">
                 <items>
                     <MenuItem mnemonicParsing="false" text="Cartera" />
                     <MenuItem mnemonicParsing="false" onAction="#goToSettings" text="Ajustes" />
@@ -43,26 +43,23 @@
                     <AnchorPane>
                         <LineChart fx:id="weekLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
                             <xAxis>
-                                <CategoryAxis label="Day" fx:id="xAxis" />
+                                <CategoryAxis label="Día" fx:id="xAxis" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis fx:id="yAxis" label="Amount" />
+                                <NumberAxis fx:id="yAxis" label="Saldo" />
                             </yAxis>
                         </LineChart>
                     </AnchorPane>
                 </Tab>
-                <Tab text="Last Month" />
                 <Tab text="All Time" />
             </TabPane>
-         <ImageView fx:id="imageView" fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="imageView" fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
-               <Image url="@../../../target/classes/images/tarjeta.jpg"/>
+               <Image url="@../../../target/classes/images/tarjeta.jpeg"/>
             </image>
          </ImageView>
         </VBox>
         <!-- Your existing VBox and other elements here -->
     </children>
-    <cursor>
-        <Cursor fx:constant="HAND" />
-    </cursor>
+
 </Pane>

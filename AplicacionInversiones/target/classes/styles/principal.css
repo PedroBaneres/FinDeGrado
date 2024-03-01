@@ -29,32 +29,27 @@
     -fx-background-color: #eeeeee;
 }
 
-.line-chart {
-    -fx-background-color: #f5f5f5;
-}
-.chart-series-line {
-    -fx-stroke: #FF0000; /* This sets the line color to red */
-    -fx-stroke-width: 2px; /* This sets the width of the line */
+.line-chart-custom .chart-line-symbol {
+    -fx-background-color: #FF5733; /* Change color of data points */
 }
 
-/* Style for the plot background */
-.chart-plot-background {
-    -fx-background-color: transparent; /* This makes the plot background transparent */
+.line-chart-custom .axis {
+    -fx-font-size: 12px; /* Adjust axis label font size */
+    -fx-tick-mark-visible: true; /* Show tick marks on axis */
 }
 
-/* Style for the chart content background */
-.chart-content {
-    -fx-background-color: transparent; /* This makes the chart content background transparent */
+.line-chart-custom .chart-legend {
+    -fx-background-color: #f0f0f0; /* Change legend background color */
 }
 
-/* Style for the horizontal grid lines */
-.chart-horizontal-grid-lines {
-    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
-    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+.line-chart-custom .chart-legend-item-symbol {
+    -fx-background-radius: 0; /* Make legend symbols square */
 }
 
-/* Style for the vertical grid lines */
-.chart-vertical-grid-lines {
-    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
-    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+.line-chart-custom .chart-series-line {
+    -fx-stroke: #0066cc; /* Change line color */
+}
+
+.line-chart-custom .chart-series-line-hover {
+    -fx-stroke: #cc3300; /* Change line color on hover */
 }

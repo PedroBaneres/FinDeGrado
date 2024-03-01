@@ -1,5 +1,7 @@
 package iesinfantaelena.bank;
 
+import iesinfantaelena.exceptions.InsufficientBalanceException;
+
 import java.sql.*;
 
 public class AccountManager {
@@ -25,7 +27,7 @@ public class AccountManager {
             insertStatement.setString(1, IBAN); // Source IBAN
             insertStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             insertStatement.setDouble(3, amount);
-            insertStatement.setString(4, "top up");
+            insertStatement.setString(4, "Ingreso");
             insertStatement.setDouble(5, BalanceAT); // BalanceAT of the source IBAN
             insertStatement.executeUpdate();
 
@@ -75,7 +77,7 @@ public class AccountManager {
             insertStatement.setString(1, IBAN);
             insertStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             insertStatement.setDouble(3, amount); // Negative amount to represent withdrawal
-            insertStatement.setString(4, "Withdrawal");
+            insertStatement.setString(4, "Retirada");
             insertStatement.setDouble(5,BalanceAT);
             insertStatement.executeUpdate();
 
@@ -94,12 +96,15 @@ public class AccountManager {
 
 
     // Method to perform a transfer between two accounts and record the transaction
-    public void transfer(String sourceIBAN, String destinationIBAN, double amount, String description, Connection connection) throws SQLException {
+    public void transfer(String sourceIBAN, String destinationIBAN, double amount, String description, Connection connection) throws SQLException, InsufficientBalanceException {
         try {
             connection.setAutoCommit(false);
 
             // Fetch balances before the transaction
             double sourceBalanceBefore = fetchBalance(sourceIBAN, connection);
+            if (sourceBalanceBefore < amount) {
+                throw new InsufficientBalanceException("Insufficient balance in the source account");
+            }
             double destinationBalanceBefore = fetchBalance(destinationIBAN, connection);
 
             // Deduct amount from source account

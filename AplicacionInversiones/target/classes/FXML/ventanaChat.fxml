@@ -10,7 +10,5 @@
       <TextField fx:id="messageTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="410.0" onAction="#sendMessage" prefHeight="37.0" prefWidth="198.0" promptText="Escribanos su problema" />
       <Label layoutX="80.0" layoutY="26.0" text="Chat con soporte" textFill="WHITE" />
    </children>
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
+
 </Pane>

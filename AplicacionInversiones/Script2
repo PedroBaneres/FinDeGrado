@@ -1,0 +1,69 @@
+create table users
+(
+    username      varchar(50)                          not null
+        primary key,
+    name          varchar(50)                          null,
+    surname       varchar(50)                          null,
+    mail          varchar(100)                         null,
+    password      varchar(50)                          null,
+    admin         tinyint(1) default 0                 null,
+    creation_date timestamp  default CURRENT_TIMESTAMP null,
+    conversation  text                                 null
+);
+
+create table accounts
+(
+    IBAN     varchar(50)    not null
+        primary key,
+    username varchar(50)    null,
+    balance  decimal(10, 2) null,
+    constraint accounts_ibfk_1
+        foreign key (username) references users (username)
+);
+
+create index username
+    on accounts (username);
+
+create table transactions
+(
+    transaction_id             int auto_increment
+        primary key,
+    source_IBAN                varchar(255) default 'RECHARGE'        null,
+    destination_IBAN           varchar(255)                           null,
+    transaction_date           timestamp    default CURRENT_TIMESTAMP null,
+    amount                     decimal(10, 2)                         not null,
+    description                text                                   null,
+    source_IBAN_balanceAT      double                                 null,
+    destination_IBAN_balanceAT double                                 null,
+    constraint transactions_ibfk_1
+        foreign key (source_IBAN) references accounts (IBAN),
+    constraint transactions_ibfk_2
+        foreign key (source_IBAN) references accounts (IBAN)
+);
+
+create index destination_IBAN
+    on transactions (destination_IBAN);
+
+create
+    definer = admin00@`%` procedure insert_account(IN p_username varchar(255), IN p_saldo decimal(10, 2))
+BEGIN
+    DECLARE next_number INT;
+    DECLARE next_iban VARCHAR(20);
+
+    -- Obtener el último IBAN insertado, si existe
+    SELECT SUBSTRING(IBAN, 6) INTO next_number FROM Bank.accounts ORDER BY IBAN DESC LIMIT 1;
+
+    -- Generar el próximo IBAN
+    IF next_number IS NOT NULL THEN
+        SET next_number = next_number + 1;
+        SET next_iban = CONCAT('ES-', LPAD(next_number, 6, '0'));
+    ELSE
+        SET next_iban = 'ES-000001'; -- Si no hay registros, empezamos desde 1
+    END IF;
+
+    -- Insertar el nuevo registro
+    INSERT INTO Bank.accounts (IBAN, username, saldo) VALUES (next_iban, p_username, p_saldo);
+
+    SELECT CONCAT('Nuevo registro insertado con IBAN: ', next_iban) AS message;
+END;
+

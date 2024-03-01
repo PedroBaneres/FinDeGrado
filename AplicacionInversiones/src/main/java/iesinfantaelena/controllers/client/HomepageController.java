@@ -35,7 +35,7 @@ public class HomepageController {
     }
     @FXML
     public void goToSupport(ActionEvent event) throws IOException{
-        masterController.switchToSupportChat();
+        masterController.showSupportChat();
     }
 
     public void initialize(MasterController masterController) throws SQLException {

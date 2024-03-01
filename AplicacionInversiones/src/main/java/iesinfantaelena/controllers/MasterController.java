@@ -1,11 +1,8 @@
 package iesinfantaelena.controllers;
 
-import iesinfantaelena.controllers.client.SettingsController;
+import iesinfantaelena.controllers.client.*;
 import iesinfantaelena.controllers.admin.AdminChatController;
-import iesinfantaelena.controllers.client.HomepageController;
 import iesinfantaelena.User;
-import iesinfantaelena.controllers.client.SupportChatController;
-import iesinfantaelena.controllers.client.TransactionsController;
 import iesinfantaelena.exceptions.DatabaseConnectionException;
 import iesinfantaelena.exceptions.ServerException;
 import iesinfantaelena.exceptions.UserNotFoundException;
@@ -27,6 +24,7 @@ public class MasterController {
     private static final Logger LOGGER = Logger.getLogger(MasterController.class.getName());
     private Stage stage;
     private Stage chatStage;
+    public Stage transferStage;
     private Socket connectionSocket;
 
     private ServerSocket serverSocket;
@@ -56,7 +54,7 @@ public class MasterController {
         registerController.initialize( this);
         stage.setScene(scene);
     }
-    public void switchToSupportChat() throws IOException {
+    public void showSupportChat() throws IOException {
         if (chatStage==null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
         Parent root = loader.load();
@@ -64,7 +62,7 @@ public class MasterController {
         Scene scene = new Scene(root);
         chatStage = new Stage();
         chatStage.setScene(scene);
-        supportChatController.initialize(chatStage,this);
+        supportChatController.initialize(this);
         connectionSocket = supportChatController.getSocket();}
         else chatStage.hide();
         chatStage.show();
@@ -138,7 +136,10 @@ public class MasterController {
                 String mail = resultSet.getString("mail");
                 String password = resultSet.getString("password");
                 boolean admin = resultSet.getBoolean("admin");
-                return new User(username, name, surname, mail, password, admin);
+                User user = new User(username, name, surname, mail, password, admin);
+                user.setIBANs(getDatabaseConnection());
+                return user;
+
             } else {
                 throw new UserNotFoundException("El usuario no se ha podido encontrar " + username);
             }
@@ -169,7 +170,7 @@ public class MasterController {
         Parent root = loader.load();
         TransactionsController transactionsController = loader.getController();
         Scene scene = new Scene(root);
-        transactionsController.setMasterController(this);
+        transactionsController.initialize(this);
         stage.setScene(scene);
     }
     public void logOut() throws IOException {
@@ -239,5 +240,17 @@ public class MasterController {
             }
         }
     }
-
+    public void showTransferMenu() throws IOException {
+        if (transferStage==null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaTransferencias.fxml"));
+            Parent root = loader.load();
+            TransferController transferController = loader.getController();
+            Scene scene = new Scene(root);
+            transferStage = new Stage();
+            transferStage.setScene(scene);
+            transferController.initialize(this);
+            }
+        else transferStage.hide();
+        transferStage.show();
+    }
 }
