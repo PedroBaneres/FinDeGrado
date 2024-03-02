@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +21,9 @@ public class TransactionsController {
     private ListView transactionList;
     @FXML
     private FontAwesomeIconView backButton;
+
+    @FXML
+    private Label balance;
     @FXML
     private Button transferBtn;
 
@@ -32,8 +36,9 @@ public class TransactionsController {
         }
     }
     @FXML
-    public void initialize(MasterController masterController){
+    public void initialize(MasterController masterController) throws SQLException {
         this.masterController = masterController;
+        balance.setText(masterController.activeUser.getTotalBalance(masterController.getDatabaseConnection()) + "€");
         // Ahora que masterController está configurado, puedes configurar el manejador de eventos
         backButton.setOnMouseClicked(event -> {
             try {

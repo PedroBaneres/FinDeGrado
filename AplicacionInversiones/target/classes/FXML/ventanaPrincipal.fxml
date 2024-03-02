@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane id="pane" prefHeight="549.0" prefWidth="641.0" stylesheets="@../styles/principal.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
+<Pane id="pane" prefHeight="549.0" prefWidth="641.0" styleClass="#pane" stylesheets="@../styles/principal.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
     <children>
         <!-- Integration of the user greeting and balance -->
         <VBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="641.0" spacing="10">
             <HBox alignment="CENTER" spacing="10">
-                <Label fx:id="labelNombre" styleClass="greeting-text" text="Hi, [Nombre del Cliente]!" />
-                <Label fx:id="balanceLabel" styleClass="balance-text" text="€ 3.210,00" />
+                <Label fx:id="labelNombre" styleClass="greeting-text" text="Hi, [Nombre del Cliente]!" textAlignment="CENTER" textFill="WHITE" />
+                <Label fx:id="balanceLabel" styleClass="balance-text" text="" />
             </HBox>
             <!-- Existing MenuButton from your FXML -->
-            <MenuButton id="menu" mnemonicParsing="false" styleClass="menu-button" style="-fx-cursor: hand;">
+            <MenuButton id="menu" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="33.0" style="-fx-cursor: hand;" styleClass="menu-button">
                 <items>
                     <MenuItem mnemonicParsing="false" text="Cartera" />
                     <MenuItem mnemonicParsing="false" onAction="#goToSettings" text="Ajustes" />
@@ -34,8 +24,11 @@
                     <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
                 </items>
                 <graphic>
-                    <FontAwesomeIconView glyphName="USER" />
+                    <FontAwesomeIconView glyphName="USER" selectionFill="BLACK" size="30" wrappingWidth="12.571428298950195" />
                 </graphic>
+            <font>
+               <Font size="18.0" />
+            </font>
             </MenuButton>
             <!-- Example LineChart integration -->
             <TabPane fx:id="tabPane" styleClass="chart-tab-pane" tabClosingPolicy="UNAVAILABLE">
@@ -43,19 +36,19 @@
                     <AnchorPane>
                         <LineChart fx:id="weekLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
                             <xAxis>
-                                <CategoryAxis label="Día" fx:id="xAxis" />
+                                <CategoryAxis label="Día" tickLabelFill="WHITE" fx:id="xAxis" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis fx:id="yAxis" label="Saldo" />
+                                <NumberAxis fx:id="yAxis" label="Saldo" tickLabelFill="WHITE" />
                             </yAxis>
                         </LineChart>
                     </AnchorPane>
                 </Tab>
                 <Tab text="All Time" />
             </TabPane>
-         <ImageView fx:id="imageView" fitHeight="163.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <ImageView fx:id="imageView" fitHeight="136.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
-               <Image url="@../../../target/classes/images/tarjeta.jpeg"/>
+               <Image url="@../../../target/classes/images/tarjeta.jpeg" />
             </image>
          </ImageView>
         </VBox>

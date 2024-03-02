@@ -165,7 +165,7 @@ public class MasterController {
         homepageController.initialize(this);
         stage.setScene(scene);
     }
-    public void switchToTransactions() throws IOException {
+    public void switchToTransactions() throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaTransacciones.fxml"));
         Parent root = loader.load();
         TransactionsController transactionsController = loader.getController();

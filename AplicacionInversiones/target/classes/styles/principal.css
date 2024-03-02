@@ -1,3 +1,6 @@
+#pane {
+    -fx-background-color: linear-gradient(to bottom, #2c3e50, #3498db); /* Gradiente de colores */
+}
 #menu {
     -fx-background-radius: 50px;
     -fx-shape: " ";
@@ -7,13 +10,12 @@
 .balance-text {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
+    -fx-text-fill: white;
 }
 
 .greeting-text {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
 }
 
 .menu-button {

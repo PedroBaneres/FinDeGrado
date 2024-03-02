@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
 
 <Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="251.0" stylesheets="@../styles/chat.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.TransferController">
    <children>
-      <TextField fx:id="usernameTextField" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="98.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Usuario destino" />
-      <Label layoutX="49.0" layoutY="22.0" text="¡Envié dinero sin comisiones!" textFill="WHITE" />
-      <TextField fx:id="quantityTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="167.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Dinero a enviar" />
-      <TextField fx:id="subjectTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="236.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Añade una descripción" />
-      <Button layoutX="89.0" layoutY="297.0" mnemonicParsing="false" onAction="#sendMoney" text="ENVIAR YA" style="-fx-cursor: hand;" />
+      <TextField fx:id="usernameTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="80.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Usuario destino" />
+      <Label layoutX="26.0" layoutY="24.0" text="¡Envié dinero sin comisiones!" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="quantityTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="148.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Dinero a enviar" />
+      <TextField fx:id="subjectTextField" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="217.0" onAction="#sendMoney" prefHeight="37.0" prefWidth="198.0" promptText="Añade una descripción" />
+      <Button id="Button" layoutX="65.0" layoutY="297.0" mnemonicParsing="false" onAction="#sendMoney" prefHeight="37.0" prefWidth="127.0" style="-fx-cursor: hand;" stylesheets="@../styles/registro.css" text="ENVIAR YA" />
    </children>
 
 </Pane>

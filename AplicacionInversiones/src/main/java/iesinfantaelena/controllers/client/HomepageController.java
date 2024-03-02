@@ -49,7 +49,7 @@ public class HomepageController {
         imageView.setOnMouseClicked(event -> {
             try {
                 masterController.switchToTransactions();
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
         });

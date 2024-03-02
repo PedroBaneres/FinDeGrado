@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.text.*?>
 
 <Pane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="422.0" stylesheets="@../styles/ajustes.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.SettingsController">
    <children>
-      <Label fx:id="labelNombre" layoutX="95.0" layoutY="20.0" text="Label" textFill="WHITE" />
-      <MenuButton layoutX="59.0" layoutY="65.0" mnemonicParsing="false" text="" style="-fx-cursor: hand;">
-         <items >
-            <MenuItem mnemonicParsing="false" onAction="#goToHomepage" text="Cartera"/>
-            <MenuItem mnemonicParsing="false" text="Ajustes"  />
-            <MenuItem mnemonicParsing="false" onAction="#goToSupport" text="Soporte"  />
+      <Label id="label" fx:id="labelNombre" layoutX="65.0" layoutY="14.0" stylesheets="@../styles/ajustes.css" text="Label" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
+      <MenuButton layoutX="59.0" layoutY="65.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="46.0" style="-fx-cursor: hand;" text="">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToHomepage" text="Cartera" />
+            <MenuItem mnemonicParsing="false" text="Ajustes" />
+            <MenuItem mnemonicParsing="false" onAction="#goToSupport" text="Soporte" />
             <MenuItem mnemonicParsing="false" onAction="#logOut" text="Cerrar Sesión" />
          </items>
          <graphic>
-            <FontAwesomeIconView glyphName="USER" />
+            <FontAwesomeIconView glyphName="USER" selectionFill="BLACK" size="20" wrappingWidth="12.571428298950195" />
          </graphic>
       </MenuButton>
-      <Button layoutX="129.0" layoutY="125.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="90.0" styleClass="button-custom" text="Cambiar" textAlignment="RIGHT" style="-fx-cursor: hand;">
+      <Button fx:id="changeNameButton" onAction="#handleChangeRequest" layoutX="129.0" layoutY="125.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" textAlignment="RIGHT">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Button>
-      <Button layoutX="129.0" layoutY="169.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="button-custom" text="Cambiar" style="-fx-cursor: hand;">
+      <Button fx:id="changeUsernameButton" onAction="#handleChangeRequest" layoutX="129.0" layoutY="169.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Button>
-      <Button layoutX="129.0" layoutY="212.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="90.0" styleClass="button-custom" text="Cambiar" style="-fx-cursor: hand;" />
-      <Button layoutX="129.0" layoutY="258.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="90.0" styleClass="button-custom" text="Cambiar" style="-fx-cursor: hand;"/>
-      <Button layoutX="129.0" layoutY="301.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="90.0" styleClass="button-custom" text="Cambiar" style="-fx-cursor: hand;" />
+      <Button fx:id="changeEmailButton" onAction="#handleChangeRequest" layoutX="129.0" layoutY="212.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
+      <Button fx:id="changePasswordButton" onAction="#handleChangeRequest" layoutX="129.0" layoutY="258.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
       <Label layoutX="48.0" layoutY="144.0" text="Nombre:" textFill="#f7f5f5" />
       <Label layoutX="50.0" layoutY="179.0" text="Usuario:" textFill="#faf6f6" />
       <Label layoutX="51.0" layoutY="222.0" text="Correo:" textFill="#faf9f9" />
-      <Label layoutX="51.0" layoutY="268.0" text="Ciudad:" textFill="#f4f2f2" />
-      <Label layoutX="28.0" layoutY="311.0" text="Contraseña:" textFill="#fcfafa" />
+      <Label layoutX="34.0" layoutY="268.0" text="Contraseña:" textFill="#fcfafa" />
    </children>
-
 </Pane>
