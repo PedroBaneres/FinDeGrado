@@ -32,7 +32,7 @@
                 </MenuButton>
                 <!-- Example LineChart integration -->
                 <TabPane fx:id="tabPane" styleClass="chart-tab-pane" tabClosingPolicy="UNAVAILABLE">
-                    <Tab text="Last Week">
+                    <Tab text="Última semana">
                         <AnchorPane>
                             <LineChart fx:id="weekLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
                                 <xAxis>
@@ -44,7 +44,7 @@
                             </LineChart>
                         </AnchorPane>
                     </Tab>
-                    <Tab text="All Time" >
+                    <Tab text="Todos los tiempos" >
                     <AnchorPane>
                         <LineChart fx:id="allLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
                             <xAxis>
@@ -64,7 +64,6 @@
                 </image>
              </ImageView>
             </VBox>
-            <!-- Your existing VBox and other elements here -->
         </children>
 
     </Pane>

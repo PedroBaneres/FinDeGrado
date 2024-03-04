@@ -1,6 +1,9 @@
 package iesinfantaelena.controllers.client;
 
+import iesinfantaelena.User;
 import iesinfantaelena.controllers.MasterController;
+import iesinfantaelena.exceptions.DatabaseConnectionException;
+import iesinfantaelena.exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,6 +25,12 @@ public class SettingsController {
     private Label labelNombre;
     private  Stage stage;
     private MasterController masterController;
+    @FXML
+    private Label nombreTxt;
+    @FXML
+    private Label usuarioTxt;
+    @FXML
+    private Label correoTxt;
 
     @FXML
     private Button changeNameButton;
@@ -41,6 +50,9 @@ public class SettingsController {
         this.masterController = masterController;
         this.stage = masterController.getStage();
         updateUserName();
+        if (masterController.activeUser != null) {
+            updateData(masterController.activeUser);
+        }
     }
     private void updateUserName() {
         if (masterController.activeUser != null) { // Asegúrate de que activeUser no es nulo
@@ -58,11 +70,11 @@ public class SettingsController {
         masterController.showSupportChat();
     }
     @FXML
-    private void handleChangeRequest(ActionEvent event) {
+    private void handleChangeRequest(ActionEvent event) throws UserNotFoundException, DatabaseConnectionException {
         // Identifica el botón que fue presionado
         Button sourceButton = (Button) event.getSource();
         String buttonId = sourceButton.getId();
-
+String username = masterController.activeUser.getUsername();
         // Determina qué cambiar basado en el ID del botón
         switch (buttonId) {
             case "changeNameButton":
@@ -82,6 +94,8 @@ public class SettingsController {
                 System.out.println("Acción desconocida");
                 break;
         }
+        User user = masterController.getClientFromDatabase(username);
+        updateData(user);
     }
     private void showInputDialog(String title, String changeType) {
         TextInputDialog dialog = new TextInputDialog();
@@ -143,6 +157,11 @@ public class SettingsController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void updateData(User user){
+        nombreTxt.setText(user.getName());
+        usuarioTxt.setText(user.getUsername());
+        correoTxt.setText(user.getMail());
     }
 }
 

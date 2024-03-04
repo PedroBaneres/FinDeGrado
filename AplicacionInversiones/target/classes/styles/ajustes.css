@@ -16,3 +16,9 @@
     -fx-background-insets: 0, 1;
     -fx-text-fill: #005cb2;
 }
+/* Estilo para el icono en la ventana de ajustes */
+#menu {
+    -fx-background-radius: 50px;
+    -fx-shape: " ";
+    -fx-background-color: transparent;
+}
