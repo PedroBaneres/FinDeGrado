@@ -44,10 +44,20 @@
 </HBox>
 <VBox prefHeight="1.0" prefWidth="248.0" styleClass="card">
     <children>
-        <ListView fx:id="transactionList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="248.0" styleClass="transaction-list">
-
+        <ListView fx:id="transactionList"
+                  maxHeight="-Infinity"
+                  maxWidth="-Infinity"
+                  minHeight="-Infinity"
+                  minWidth="-Infinity"
+                  prefHeight="271.0"
+                  prefWidth="248.0"
+                  styleClass="transaction-list"
+                  stylesheets="@../styles/principal.css"
+                  VBox.vgrow="ALWAYS">
         </ListView>
-       <Button id="botonEnviar" fx:id="transferBtn" minHeight="-Infinity" minWidth="-Infinity" onAction="#openTransfer" prefHeight="43.0" prefWidth="239.0" styleClass="botonEnviar" stylesheets="@../styles/transactions.css" text="Enviar Dinero" textAlignment="CENTER">
+
+
+        <Button id="botonEnviar" fx:id="transferBtn" minHeight="-Infinity" minWidth="-Infinity" onAction="#openTransfer" prefHeight="43.0" prefWidth="239.0" styleClass="botonEnviar" stylesheets="@../styles/transactions.css" text="Enviar Dinero" textAlignment="CENTER">
             <opaqueInsets>
                <Insets />
             </opaqueInsets>

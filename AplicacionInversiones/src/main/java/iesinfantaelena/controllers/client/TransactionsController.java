@@ -67,7 +67,7 @@ public class TransactionsController {
             Connection connection = masterController.getDatabaseConnection();
 
             // Prepare the SQL statement to fetch transactions
-            String sql = "SELECT * FROM transactions WHERE source_IBAN IN (SELECT IBAN FROM accounts WHERE Username = ?) OR destination_IBAN IN (SELECT IBAN FROM accounts WHERE Username = ?)";
+            String sql = "SELECT * FROM transactions WHERE source_IBAN IN (SELECT IBAN FROM accounts WHERE Username = ?) OR destination_IBAN IN (SELECT IBAN FROM accounts WHERE Username = ?) ORDER BY transaction_date DESC";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, masterController.activeUser.getUsername());
             preparedStatement.setString(2, masterController.activeUser.getUsername());
@@ -100,9 +100,10 @@ public class TransactionsController {
 
                 // Determine the account IBAN to display
                 String accountIBAN = isSender ? destinationIBAN : sourceIBAN;
-                    if (accountIBAN==null){
-                        accountIBAN = "";
-                    }
+                if (accountIBAN == null) {
+                    accountIBAN = "";
+                }
+
                 // Format the transaction date
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
                 String formattedDate = dateFormat.format(date);
@@ -118,6 +119,7 @@ public class TransactionsController {
             e.printStackTrace(); // Handle the exception appropriately
         }
     }
+
 
 
 
