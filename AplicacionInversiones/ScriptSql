@@ -78,7 +78,7 @@ BEGIN
     END IF;
 
     -- Insertar el nuevo registro
-    INSERT INTO Bank.accounts (IBAN, username, saldo) VALUES (next_iban, p_username, p_saldo);
+    INSERT INTO Bank.accounts (IBAN, username, balance) VALUES (next_iban, p_username, p_saldo);
 
     SELECT CONCAT('Nuevo registro insertado con IBAN: ', next_iban) AS message;
 END;

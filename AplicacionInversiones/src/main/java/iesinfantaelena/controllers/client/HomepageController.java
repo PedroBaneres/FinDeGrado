@@ -22,6 +22,8 @@ public class HomepageController {
     private Label balanceLabel;
     @FXML
     private LineChart<String, Number> weekLineChart;
+    @FXML
+    private LineChart<String,Number> allLineChart;
     
     @FXML
     private ImageView imageView;
@@ -44,6 +46,7 @@ public class HomepageController {
         balanceLabel.setText(masterController.activeUser.getTotalBalance(masterController.getDatabaseConnection()) + "€");
         this.masterController= masterController;
         populateLastWeekChart();
+        populateAllTimeChart();
     }
     public void initialize() {
         imageView.setOnMouseClicked(event -> {
@@ -72,4 +75,22 @@ public class HomepageController {
             e.printStackTrace();
         }
     }
+    private void populateAllTimeChart() {
+        try {
+            // Get database connection
+            Connection connection = masterController.getDatabaseConnection();
+
+            // Get username of the logged-in user
+            String username = masterController.activeUser.getUsername();
+
+            // Get account balance data for all time
+            XYChart.Series<String, Number> series = chartManager.getAccountBalanceDataAllTime(connection, username);
+
+            // Add the series to the chart
+            allLineChart.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
