@@ -6,7 +6,7 @@
 
 .login_contenedor_logo {
     -fx-alignment: center;
-    -fx-background-color: linear-gradient(to bottom, #c0c0c0, #808080); /* Gradiente grisáceo */
+    -fx-background-color: linear-gradient(to bottom, #808080, #c0c0c0); /* Gradiente grisáceo */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Sombra suave */
     -fx-padding: 20; /* Espaciado interno */
 }
