@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <?import de.jensd.fx.glyphs.fontawesome.*?>
-    <?import javafx.scene.chart.*?>
-    <?import javafx.scene.control.*?>
-    <?import javafx.scene.image.*?>
-    <?import javafx.scene.layout.*?>
-    <?import javafx.scene.text.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Pane id="pane" prefHeight="549.0" prefWidth="641.0" styleClass="#pane" stylesheets="@../styles/principal.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<Pane id="pane" prefHeight="549.0" prefWidth="641.0" styleClass="#pane" stylesheets="@../styles/principal.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.HomepageController">
         <children>
             <!-- Integration of the user greeting and balance -->
             <VBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="641.0" spacing="10">
@@ -44,7 +54,7 @@
                             </LineChart>
                         </AnchorPane>
                     </Tab>
-                    <Tab text="Todos los tiempos" >
+                    <Tab text="Todos los tiempos">
                     <AnchorPane>
                         <LineChart fx:id="allLineChart" prefHeight="253.0" prefWidth="641.0" styleClass="line-chart-custom">
                             <xAxis>
@@ -58,7 +68,7 @@
                     </AnchorPane>
                     </Tab>
                 </TabPane>
-             <ImageView fx:id="imageView" fitHeight="136.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+             <ImageView fx:id="imageView" fitHeight="123.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                 <image>
                    <Image url="@../../../target/classes/images/tarjeta.jpeg" />
                 </image>

@@ -3,10 +3,19 @@
 }
 
 #Button {
-    -fx-background-color: #ffffff; /* Mismo color de fondo que .Button */
-    -fx-text-fill: #0a0a0a; /* Mismo color de texto que .Button */
-    -fx-font-size: 14px; /* Mismo tamaño de fuente que .Button */
-    -fx-padding: 5 22 5 22; /* Mismo espaciado interno que .Button */
+    -fx-background-color: #ffffff, #d1e0fc;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5;
+    -fx-text-fill: #0078d7;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 0);
+}
+
+#Button:hover{
+    -fx-background-color: #d1e0fc, #aec6f3;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #005cb2;
 }
 
 #anchorPane .TextField, #anchorPane .PasswordField {
@@ -14,4 +23,16 @@
     -fx-border-color: #cccccc; /* Mismo color de borde que .TextField y .PasswordField */
     -fx-border-radius: 5; /* Mismo radio de borde que .TextField y .PasswordField */
     -fx-background-radius: 5; /* Mismo radio de fondo que .TextField y .PasswordField */
+}
+#welcomeLabel {
+    -fx-text-fill: #ecf0f1; /* Un color claro para contraste con el fondo oscuro */
+    -fx-font-size: 20px; /* Tamaño de fuente más grande para destacar */
+    -fx-font-weight: bold; /* Fuente en negrita para mayor prominencia */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0, 0, 1); /* Sombra suave para mejor legibilidad */
+}
+#welcomeLabel2 {
+    -fx-text-fill: #ecf0f1; /* Un color claro para contraste con el fondo oscuro */
+    -fx-font-size: 12px; /* Tamaño de fuente más grande para destacar */
+    -fx-font-weight: bold; /* Fuente en negrita para mayor prominencia */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0, 0, 1); /* Sombra suave para mejor legibilidad */
 }

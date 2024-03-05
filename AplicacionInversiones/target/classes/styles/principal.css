@@ -31,6 +31,10 @@
     -fx-background-color: #eeeeee;
 }
 
+.line-chart-custom .chart-legend {
+    visibility: hidden; /* Hide the legend */
+}
+
 .line-chart-custom .chart-line-symbol {
     -fx-background-color: #FF5733; /* Change color of data points */
 }
@@ -40,13 +44,33 @@
     -fx-tick-mark-visible: true; /* Show tick marks on axis */
 }
 
-.line-chart-custom .chart-legend {
-    -fx-background-color: #f0f0f0; /* Change legend background color */
+.line-chart-custom .axis {
+    -fx-font-size: 14px; /* Adjust axis label font size */
+    -fx-font-weight: bold; /* Make the font bold */
+    -fx-text-fill: #ffffff; /* Set the font color to white */
 }
 
-.line-chart-custom .chart-legend-item-symbol {
-    -fx-background-radius: 0; /* Make legend symbols square */
+.tab-pane .tab {
+    -fx-background-color: linear-gradient(to bottom, #3498db, #2980b9); /* Blueish gradient */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px 10px; /* Padding */
 }
+
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #2980b9, #3498db); /* Blueish gradient for selected tab */
+}
+
+.tab-pane .tab-label {
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-weight: bold; /* Font weight */
+}
+.line-chart-custom .chart-plot-background {
+    -fx-background-color: lightcyan; /* Set background color of the plot area */
+}
+
+
+
 
 .line-chart-custom .chart-series-line {
     -fx-stroke: #0066cc; /* Change line color */
@@ -55,3 +79,4 @@
 .line-chart-custom .chart-series-line-hover {
     -fx-stroke: #cc3300; /* Change line color on hover */
 }
+

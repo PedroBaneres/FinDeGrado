@@ -8,6 +8,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import java.sql.SQLException;
 public class HomepageController {
     private MasterController masterController;
     private ChartManager chartManager;
+    @FXML
+    private TabPane tabPane;
     @FXML
     private Label labelNombre;
     @FXML
@@ -43,10 +47,12 @@ public class HomepageController {
     public void initialize(MasterController masterController) throws SQLException {
         labelNombre.setText("Bienvenido " + masterController.activeUser.getUsername());
         this.chartManager = new ChartManager();
+
         balanceLabel.setText(masterController.activeUser.getTotalBalance(masterController.getDatabaseConnection()) + "€");
         this.masterController= masterController;
         populateLastWeekChart();
         populateAllTimeChart();
+
     }
     public void initialize() {
         imageView.setOnMouseClicked(event -> {

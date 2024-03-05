@@ -56,7 +56,7 @@ public class SettingsController {
     }
     private void updateUserName() {
         if (masterController.activeUser != null) { // Asegúrate de que activeUser no es nulo
-            labelNombre.setText("¿Qué deseas modificar de tu cuenta " + masterController.activeUser.getUsername() + " ?");
+            labelNombre.setText("Revisé su configuración ");
         }
     }
     public void goToHomepage(ActionEvent event) throws IOException, SQLException {

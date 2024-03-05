@@ -1,8 +1,5 @@
-.header {
-    -fx-font-size: 20px;
-    -fx-background-color: #ffffff;
-    -fx-alignment: center-right;
-    -fx-padding: 10px;
+#header {
+    -fx-background-color: linear-gradient(to bottom, #2c3e50, #3498db); /* Gradiente de colores */
 }
 
 .transaction-list {
@@ -18,6 +15,22 @@
 .card-container {
     -fx-alignment: center; /* Asegura que el label esté centrado sobre la imagen */
 }
+#botonEnviar {
+    -fx-background-color: #ffffff, #d1e0fc;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5;
+    -fx-text-fill: #0078d7;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 0);
+
+}
+
+#botonEnviar:hover{
+    -fx-background-color: #d1e0fc, #aec6f3;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #005cb2;
+}
 
 .balance {
     -fx-font-size: 12px;
@@ -28,7 +41,7 @@
 .labelTransactions {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
+    -fx-text-fill: white;
 }
 .back-button {
     -fx-padding: 10px;
@@ -37,4 +50,18 @@
 
 .back-button:hover {
     -fx-background-color: #f0f0f0; /* o cualquier otro color al pasar el mouse */
+}
+.list-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-visible: false;
+}
+.list-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+}
+
+.list-view .scroll-bar:horizontal .thumb {
+    -fx-visible: false;
 }

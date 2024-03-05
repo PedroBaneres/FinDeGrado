@@ -10,12 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +38,7 @@ public class MasterController {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaAcceso.fxml"));
         Parent root = loader.load();
-
+        stage.setResizable(false);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
@@ -57,10 +59,14 @@ public class MasterController {
     public void showSupportChat() throws IOException {
         if (chatStage==null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ventanaChat.fxml"));
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/soporte.jpg")));
+
         Parent root = loader.load();
         SupportChatController supportChatController = loader.getController();
         Scene scene = new Scene(root);
         chatStage = new Stage();
+        chatStage.getIcons().add(icon);
+        chatStage.setResizable(false);
         chatStage.setScene(scene);
         supportChatController.initialize(this);
         connectionSocket = supportChatController.getSocket();}
@@ -247,6 +253,9 @@ public class MasterController {
             TransferController transferController = loader.getController();
             Scene scene = new Scene(root);
             transferStage = new Stage();
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/dinero.png")));
+            transferStage.getIcons().add(icon);
+            transferStage.setResizable(false);
             transferStage.setScene(scene);
             transferController.initialize(this);
             }

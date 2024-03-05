@@ -1,53 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox id="header" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.TransactionsController">
-   <FontAwesomeIconView id="backButton" glyphName="ARROW_LEFT" textAlignment="CENTER" wrappingWidth="20.0">
-      <font>
-         <Font size="19.0" />
-      </font></FontAwesomeIconView>
-    <StackPane minWidth="-Infinity" prefHeight="84.0" prefWidth="208.0" styleClass="card-container">
-        <ImageView fitHeight="117.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../../../target/classes/images/tarjeta.png" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
-        </ImageView>
-        <Label prefHeight="85.0" prefWidth="176.0" styleClass="balance" stylesheets="@../styles/transactions.css" text="€ 3.210,00">
-         <opaqueInsets>
+<VBox id="header" styleClass="header" stylesheets="@../styles/transactions.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.TransactionsController">
+<FontAwesomeIconView id="backButton" fx:id="backButton" fill="WHITE" glyphName="ARROW_LEFT" wrappingWidth="247.99999380111694">
+    <font>
+        <Font size="19.0" />
+    </font>
+</FontAwesomeIconView>
+<StackPane minWidth="-Infinity" prefHeight="84.0" prefWidth="208.0" styleClass="card-container">
+    <ImageView fitHeight="117.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../target/classes/images/tarjeta.jpeg" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
+    </ImageView>
+    <Label fx:id="balance" prefHeight="85.0" prefWidth="176.0" styleClass="balance" stylesheets="@../styles/transactions.css">
+        <opaqueInsets>
             <Insets right="100.0" top="50.0" />
-         </opaqueInsets>
-         <padding>
+        </opaqueInsets>
+        <padding>
             <Insets right="50.0" top="80.0" />
-         </padding>
-         <StackPane.margin>
+        </padding>
+        <StackPane.margin>
             <Insets left="35.0" />
-         </StackPane.margin></Label>
-      <VBox.margin>
-         <Insets left="35.0" />
-      </VBox.margin>
-    </StackPane>
-    <VBox prefHeight="1.0" prefWidth="248.0" styleClass="card">
-      <children>
-          <Label prefHeight="73.0" prefWidth="243.0" styleClass="labelTransactions" stylesheets="@../styles/transactions.css" text="Transactions">
+        </StackPane.margin>
+    </Label>
+    <VBox.margin>
+        <Insets left="35.0" />
+    </VBox.margin>
+</StackPane>
+<HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="248.0">
+    <Label prefHeight="30.0" prefWidth="158.0" styleClass="labelTransactions" text="Transactions" textFill="WHITE">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+        <font>
+            <Font size="23.0" />
+        </font>
+    </Label>
+</HBox>
+<VBox prefHeight="1.0" prefWidth="248.0" styleClass="card">
+    <children>
+        <ListView fx:id="transactionList"
+                  maxHeight="-Infinity"
+                  maxWidth="-Infinity"
+                  minHeight="-Infinity"
+                  minWidth="-Infinity"
+                  prefHeight="271.0"
+                  prefWidth="248.0"
+                  styleClass="transaction-list"
+                  stylesheets="@../styles/principal.css"
+                  VBox.vgrow="ALWAYS">
+        </ListView>
+
+
+        <Button id="botonEnviar" fx:id="transferBtn" minHeight="-Infinity" minWidth="-Infinity" onAction="#openTransfer" prefHeight="43.0" prefWidth="239.0" styleClass="botonEnviar" stylesheets="@../styles/transactions.css" text="Enviar Dinero" textAlignment="CENTER">
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
             <VBox.margin>
-               <Insets top="10.0" />
+               <Insets left="5.0" top="10.0" />
             </VBox.margin>
-            <font>
-               <Font size="23.0" />
-            </font></Label>
-          <ListView fx:id="transactionList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="248.0" styleClass="transaction-list">
-        <!-- Las transacciones se cargarían aquí -->
-    </ListView>
-      </children>
-    </VBox>
-    <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
-    </padding>
+           <graphic>
+               <FontAwesomeIconView fill="#0078d7" glyphName="ARROW_RIGHT" selectionFill="#0078d7" size="30" textAlignment="RIGHT" wrappingWidth="27.571423530578613" />
+           </graphic>
+         </Button>
+    </children>
+</VBox>
+<padding>
+    <Insets bottom="10" left="10" right="10" top="10" />
+</padding>
 </VBox>

@@ -1,3 +1,6 @@
+#pane {
+    -fx-background-color: linear-gradient(to bottom, #2c3e50, #3498db); /* Gradiente de colores */
+}
 #menu {
     -fx-background-radius: 50px;
     -fx-shape: " ";
@@ -7,13 +10,12 @@
 .balance-text {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
+    -fx-text-fill: white;
 }
 
 .greeting-text {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
 }
 
 .menu-button {
@@ -29,32 +31,52 @@
     -fx-background-color: #eeeeee;
 }
 
-.line-chart {
-    -fx-background-color: #f5f5f5;
-}
-.chart-series-line {
-    -fx-stroke: #FF0000; /* This sets the line color to red */
-    -fx-stroke-width: 2px; /* This sets the width of the line */
+.line-chart-custom .chart-legend {
+    visibility: hidden; /* Hide the legend */
 }
 
-/* Style for the plot background */
-.chart-plot-background {
-    -fx-background-color: transparent; /* This makes the plot background transparent */
+.line-chart-custom .chart-line-symbol {
+    -fx-background-color: #FF5733; /* Change color of data points */
 }
 
-/* Style for the chart content background */
-.chart-content {
-    -fx-background-color: transparent; /* This makes the chart content background transparent */
+.line-chart-custom .axis {
+    -fx-font-size: 12px; /* Adjust axis label font size */
+    -fx-tick-mark-visible: true; /* Show tick marks on axis */
 }
 
-/* Style for the horizontal grid lines */
-.chart-horizontal-grid-lines {
-    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
-    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+.line-chart-custom .axis {
+    -fx-font-size: 14px; /* Adjust axis label font size */
+    -fx-font-weight: bold; /* Make the font bold */
+    -fx-text-fill: #ffffff; /* Set the font color to white */
 }
 
-/* Style for the vertical grid lines */
-.chart-vertical-grid-lines {
-    -fx-stroke: #cccccc; /* Light gray color for grid lines, adjust if needed */
-    -fx-opacity: 0.75; /* Semi-transparent grid lines */
+.tab-pane .tab {
+    -fx-background-color: linear-gradient(to bottom, #3498db, #2980b9); /* Blueish gradient */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px 10px; /* Padding */
 }
+
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #2980b9, #3498db); /* Blueish gradient for selected tab */
+}
+
+.tab-pane .tab-label {
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-weight: bold; /* Font weight */
+}
+.line-chart-custom .chart-plot-background {
+    -fx-background-color: lightcyan; /* Set background color of the plot area */
+}
+
+
+
+
+.line-chart-custom .chart-series-line {
+    -fx-stroke: #0066cc; /* Change line color */
+}
+
+.line-chart-custom .chart-series-line-hover {
+    -fx-stroke: #cc3300; /* Change line color on hover */
+}
+

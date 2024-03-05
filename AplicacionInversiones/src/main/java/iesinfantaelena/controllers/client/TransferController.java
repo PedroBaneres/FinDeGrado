@@ -48,7 +48,7 @@ public class TransferController {
 
         // Check if the destination username is the same as the active user's username
         if (username.equals(masterController.activeUser.getUsername())) {
-            JOptionPane.showMessageDialog(null, "No puede enviar dinero a su propia cuenta", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No puede enviar dinero.jpg a su propia cuenta", "Error", JOptionPane.WARNING_MESSAGE);
             return; // Exit the method if trying to send money to self
         }
 

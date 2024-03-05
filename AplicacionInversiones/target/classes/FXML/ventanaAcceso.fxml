@@ -23,7 +23,7 @@
          <children>
             <ImageView fx:id="imagen" fitHeight="187.0" fitWidth="161.0" nodeOrientation="INHERIT" onMouseClicked="#switchImage" pickOnBounds="true" preserveRatio="true" styleClass="contenedor_login">
                <image>
-                  <Image url="@../images/icono-usuario.jpg" />
+                  <Image url="@../images/icono-usuario-sinfondo.png" />
                </image>
                <VBox.margin>
                   <Insets left="100.0" right="20.0" />

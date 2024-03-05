@@ -50,9 +50,9 @@ public class LoginController {
     @FXML
     void switchImage(MouseEvent event) {
         if (isImage1) {
-            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario.jpg").toExternalForm()));
+            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario-sinfondo.png").toExternalForm()));
         } else {
-            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario-2.jpg").toExternalForm()));
+            imagen.setImage(new Image(getClass().getResource("/images/icono-usuario2-sinfondo.png").toExternalForm()));
         }
 
         isImage1 = !isImage1;

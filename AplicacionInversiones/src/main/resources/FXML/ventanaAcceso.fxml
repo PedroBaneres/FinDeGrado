@@ -23,34 +23,34 @@
          <children>
             <ImageView fx:id="imagen" fitHeight="187.0" fitWidth="161.0" nodeOrientation="INHERIT" onMouseClicked="#switchImage" pickOnBounds="true" preserveRatio="true" styleClass="contenedor_login">
                <image>
-                  <Image url="@../images/icono-usuario.jpg" />
+                  <Image url="@../images/icono-usuario-sinfondo.png" />
                </image>
                <VBox.margin>
                   <Insets left="100.0" right="20.0" />
                </VBox.margin>
             </ImageView>
 
-            <Label stylesheets="@../../../../target/classes/styles/login.css" text="Usuario:">
+            <Label stylesheets="@../../../target/classes/styles/login.css" text="Usuario:">
                <VBox.margin>
                   <Insets left="50.0" top="15.0" />
                </VBox.margin></Label>
-            <TextField fx:id="txtNombre" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="TextField" stylesheets="@../../../../target/classes/styles/login.css">
+            <TextField fx:id="txtNombre" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="TextField" stylesheets="@../../../target/classes/styles/login.css">
                <VBox.margin>
                   <Insets left="50.0" />
                </VBox.margin></TextField>
-            <Label stylesheets="@../../../../target/classes/styles/login.css" text="Contraseña:">
+            <Label stylesheets="@../../../target/classes/styles/login.css" text="Contraseña:">
                <VBox.margin>
                   <Insets left="50.0" top="15.0" />
                </VBox.margin></Label>
-            <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="PasswordField" stylesheets="@../../../../target/classes/styles/login.css">
+            <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#logIn" prefHeight="28.0" prefWidth="270.0" styleClass="PasswordField" stylesheets="@../../../target/classes/styles/login.css">
                <VBox.margin>
                   <Insets left="50.0" />
                </VBox.margin></PasswordField>
-            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logIn" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../../target/classes/styles/login.css" text="Acceder">
+            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logIn" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../target/classes/styles/login.css" text="Acceder" style="-fx-cursor: hand;">
                <VBox.margin>
                   <Insets left="110.0" top="10.0" />
                </VBox.margin></Button>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../../target/classes/styles/login.css" text="Registrarse">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRegistration" prefHeight="34.0" prefWidth="142.0" styleClass="Button" stylesheets="@../../../target/classes/styles/login.css" text="Registrarse" style="-fx-cursor: hand;">
                <VBox.margin>
                   <Insets left="110.0" top="10.0" />
                </VBox.margin></Button>
