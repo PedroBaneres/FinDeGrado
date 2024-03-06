@@ -70,7 +70,7 @@
                 </TabPane>
              <ImageView fx:id="imageView" fitHeight="123.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                 <image>
-                   <Image url="@../../../target/classes/images/tarjeta.jpeg" />
+                   <Image url="@../images/tarjeta.jpeg" />
                 </image>
              </ImageView>
             </VBox>

@@ -1,3 +1,4 @@
+create database if not exists Bank;
 create table users
 (
     username      varchar(50)                          not null
@@ -62,8 +63,21 @@ BEGIN
     END IF;
 
     -- Insertar el nuevo registro
-    INSERT INTO Bank.accounts (IBAN, username, saldo) VALUES (next_iban, p_username, p_saldo);
+    INSERT INTO Bank.accounts (IBAN, username, balance) VALUES (next_iban, p_username, p_saldo);
 
     SELECT CONCAT('Nuevo registro insertado con IBAN: ', next_iban) AS message;
 END;
+
+LOS INSERT:
+INSERT INTO users (username, name, surname, mail, password, admin) VALUES
+                                                                       ('laura_g', 'Laura', 'García', 'laura.garcia@example.com', 'contrasena123', 0),
+                                                                       ('david_m', 'David', 'Martínez', 'david.martinez@example.com', 'contrasena123', 0),
+                                                                       ('carmen_r', 'Carmen', 'Rodríguez', 'carmen.rodriguez@example.com', 'contrasena123', 1);
+CALL insert_account('laura_g', 2000.00);
+CALL insert_account('david_m', 2500.50);
+CALL insert_account('carmen_r', 3000.75);
+INSERT INTO transactions (source_IBAN, destination_IBAN, amount, description) VALUES
+                                                                                  ('ES-000001', 'ES-000002', 150.00, 'Pago de alquiler'),
+                                                                                  ('ES-000002', 'ES-000003', 45.75, 'Cena con amigos');
+
 

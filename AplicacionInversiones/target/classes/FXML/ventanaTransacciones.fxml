@@ -15,7 +15,7 @@
 </FontAwesomeIconView>
 <StackPane minWidth="-Infinity" prefHeight="84.0" prefWidth="208.0" styleClass="card-container">
     <ImageView fitHeight="117.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../../target/classes/images/tarjeta.jpeg" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
+        <Image url="@../images/tarjeta.jpeg" /> <!-- Asegúrate de poner la ruta correcta de tu imagen -->
     </ImageView>
     <Label fx:id="balance" prefHeight="85.0" prefWidth="176.0" styleClass="balance" stylesheets="@../styles/transactions.css">
         <opaqueInsets>

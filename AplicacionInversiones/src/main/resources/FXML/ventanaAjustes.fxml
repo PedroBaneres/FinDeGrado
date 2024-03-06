@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<Pane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="422.0" stylesheets="@../styles/ajustes.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.SettingsController">
+<Pane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="422.0" stylesheets="@../styles/ajustes.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesinfantaelena.controllers.client.SettingsController">
    <children>
       <Label id="label" fx:id="labelNombre" layoutX="65.0" layoutY="14.0" stylesheets="@../styles/ajustes.css" text="Label" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
@@ -30,19 +27,13 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Button>
-      <Button fx:id="changeUsernameButton" layoutX="301.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleChangeRequest" prefHeight="31.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets></Button>
-      <Button fx:id="changeEmailButton" layoutX="301.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleChangeRequest" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
-      <Button fx:id="changePasswordButton" layoutX="301.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleChangeRequest" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
+      <Button fx:id="changeEmailButton" layoutX="301.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleChangeRequest" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
+      <Button fx:id="changePasswordButton" layoutX="301.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleChangeRequest" prefHeight="15.0" prefWidth="90.0" style="-fx-cursor: hand;" styleClass="button-custom" text="Cambiar" />
       <Label id="menu" layoutX="47.0" layoutY="143.0" text="Nombre:" textFill="#f7f5f5" />
-      <Label layoutX="49.0" layoutY="191.0" text="Usuario:" textFill="#faf6f6" />
-      <Label layoutX="51.0" layoutY="240.0" text="Correo:" textFill="#faf9f9" />
-      <Label layoutX="51.0" layoutY="286.0" text="Contraseña:" textFill="#fcfafa" />
-      <Label text="*******" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="286.0" textFill="#f7f5f5" prefHeight="17.0" prefWidth="174.0" />
+      <Label layoutX="51.0" layoutY="191.0" text="Correo:" textFill="#faf9f9" />
+      <Label layoutX="39.0" layoutY="236.0" text="Contraseña:" textFill="#fcfafa" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="236.0" prefHeight="17.0" prefWidth="174.0" text="*******" textFill="#f7f5f5" />
       <Label fx:id="nombreTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="143.0" prefHeight="17.0" prefWidth="174.0" text="Nombre" textFill="#f7f5f5" />
-      <Label fx:id="usuarioTxt" alignment="CENTER" layoutX="123.0" layoutY="191.0" prefHeight="17.0" prefWidth="174.0" text="Usuario" textFill="#f7f5f5" />
-      <Label fx:id="correoTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="240.0" prefHeight="17.0" prefWidth="174.0" text="Correo" textFill="#f7f5f5" />
+      <Label fx:id="correoTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="191.0" prefHeight="17.0" prefWidth="174.0" text="Correo" textFill="#f7f5f5" />
    </children>
 </Pane>

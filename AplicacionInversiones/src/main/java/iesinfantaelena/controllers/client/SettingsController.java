@@ -6,9 +6,7 @@ import iesinfantaelena.exceptions.DatabaseConnectionException;
 import iesinfantaelena.exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,8 +32,7 @@ public class SettingsController {
 
     @FXML
     private Button changeNameButton;
-    @FXML
-    private Button changeUsernameButton;
+
     @FXML
     private Button changePasswordButton;
     @FXML
@@ -56,7 +53,7 @@ public class SettingsController {
     }
     private void updateUserName() {
         if (masterController.activeUser != null) { // Asegúrate de que activeUser no es nulo
-            labelNombre.setText("Revisé su configuración ");
+            labelNombre.setText("Revisé su configuración " + masterController.activeUser.getUsername());
         }
     }
     public void goToHomepage(ActionEvent event) throws IOException, SQLException {
@@ -74,14 +71,11 @@ public class SettingsController {
         // Identifica el botón que fue presionado
         Button sourceButton = (Button) event.getSource();
         String buttonId = sourceButton.getId();
-String username = masterController.activeUser.getUsername();
+        String username = masterController.activeUser.getUsername();
         // Determina qué cambiar basado en el ID del botón
         switch (buttonId) {
             case "changeNameButton":
                 showInputDialog("Cambiar Nombre", "nombre");
-                break;
-            case "changeUsernameButton":
-                showInputDialog("Cambiar usuario", "usuario");
                 break;
             case "changePasswordButton":
                 showInputDialog("Cambiar contraseña", "contraseña");
@@ -98,37 +92,75 @@ String username = masterController.activeUser.getUsername();
         updateData(user);
     }
     private void showInputDialog(String title, String changeType) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle(title);
-        dialog.setHeaderText(null);
-        dialog.setContentText("Por favor, introduce el nuevo " + changeType + ":");
+        if ("contraseña".equals(changeType)) {
+            // Crea un diálogo personalizado para la contraseña
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle(title);
+            dialog.setHeaderText(null);
 
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(newValue -> updateUserData(changeType, newValue));
+            // Configura el tipo de botones en el diálogo
+            ButtonType okButtonType = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+
+            // Crea un PasswordField para ingresar la contraseña
+            PasswordField passwordField = new PasswordField();
+            passwordField.setPromptText("Contraseña");
+
+            // Añade el PasswordField al diálogo
+            dialog.getDialogPane().setContent(passwordField);
+
+            // Convierte el resultado en un string cuando el botón Aceptar es presionado
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == okButtonType) {
+                    return passwordField.getText();
+                }
+                return null;
+            });
+
+            // Muestra el diálogo y captura el resultado
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(newValue -> updateUserData(changeType, newValue));
+        } else {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle(title);
+            dialog.setHeaderText(null);
+            dialog.setContentText("Por favor, introduce el nuevo " + changeType + ":");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(newValue -> updateUserData(changeType, newValue));
+        }
     }
     private void updateUserData(String changeType, String newValue) {
         // Asume que `conn` es la conexión a la base de datos obtenida previamente
         try (Connection conn = masterController.getDatabaseConnection()) {
             conn.setAutoCommit(false); // Inicia una transacción
 
-            if ("usuario".equals(changeType)) {
-                // Actualizar primero las referencias en otras tablas
-                String updateAccountsSQL = "UPDATE accounts SET username = ? WHERE username = ?";
-                try (PreparedStatement pstmtAccounts = conn.prepareStatement(updateAccountsSQL)) {
-                    pstmtAccounts.setString(1, newValue);
-                    pstmtAccounts.setString(2, masterController.activeUser.getUsername());
-                    pstmtAccounts.executeUpdate();
-                }
+            boolean esValido;
+            switch (changeType) {
+                case "nombre":
+                    esValido = esNombreValido(newValue);
+                    break;
+                case "contraseña":
+                    esValido = esContrasenaValida(newValue);
+                    break;
+                case "correo":
+                    esValido = esCorreoValido(newValue);
+                    break;
+                default:
+                    esValido = false;
+                    break;
             }
 
-            // Actualizar la tabla users
+            if (!esValido) {
+                masterController.showError("El ajuste introducido no es válido por favor pruebe de nuevo.");
+                return;
+            }
+
+
             String sql = "";
             switch (changeType) {
                 case "nombre":
                     sql = "UPDATE users SET name = ? WHERE username = ?";
-                    break;
-                case "usuario":
-                    sql = "UPDATE users SET username = ? WHERE username = ?";
                     break;
                 case "contraseña":
                     sql = "UPDATE users SET password = ? WHERE username = ?";
@@ -160,8 +192,18 @@ String username = masterController.activeUser.getUsername();
     }
     public void updateData(User user){
         nombreTxt.setText(user.getName());
-        usuarioTxt.setText(user.getUsername());
         correoTxt.setText(user.getMail());
+    }
+    private boolean esNombreValido(String nombre) {
+        String regex = "^[A-Za-z ]+$";
+        return nombre.matches(regex);
+    }
+    private boolean esContrasenaValida(String contrasena) {
+        return contrasena.length() >= 8;
+    }
+    private boolean esCorreoValido(String correo) {
+        String regex = "^[\\w-_.+]*[\\w-_.]@([\\w]+\\.)+[\\w]+[\\w]$";
+        return correo.matches(regex);
     }
 }
 
