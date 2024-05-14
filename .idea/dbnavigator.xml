@@ -2,8 +2,99 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
+  <component name="DBNavigator.Project.DatabaseConsoleManager">
+    <connection id="061b050b-f522-45f4-a762-0d158651197c">
+      <console name="Connection" type="STANDARD" schema="Bank" session="Main"><![CDATA[create database if not exists Bank;
+create table users
+(
+    username      varchar(50)                          not null
+        primary key,
+    name          varchar(50)                          null,
+    surname       varchar(50)                          null,
+    mail          varchar(100)                         null,
+    password      varchar(50)                          null,
+    admin         tinyint(1) default 0                 null,
+    creation_date timestamp  default CURRENT_TIMESTAMP null,
+    conversation  text                                 null
+);
+
+create table accounts
+(
+    IBAN     varchar(50)    not null
+        primary key,
+    username varchar(50)    null,
+    balance  decimal(10, 2) null,
+    constraint accounts_ibfk_1
+        foreign key (username) references users (username)
+);
+
+create index username
+    on accounts (username);
+
+create table transactions
+(
+    transaction_id             int auto_increment
+        primary key,
+    source_IBAN                varchar(255) default 'RECHARGE'        null,
+    destination_IBAN           varchar(255)                           null,
+    transaction_date           timestamp    default CURRENT_TIMESTAMP null,
+    amount                     decimal(10, 2)                         not null,
+    description                text                                   null,
+    source_IBAN_balanceAT      double                                 null,
+    destination_IBAN_balanceAT double                                 null,
+    constraint transactions_ibfk_1
+        foreign key (source_IBAN) references accounts (IBAN),
+    constraint transactions_ibfk_2
+        foreign key (source_IBAN) references accounts (IBAN)
+);
+
+create index destination_IBAN
+    on transactions (destination_IBAN);
+
+create
+    definer = admin00@`%` procedure insert_account(IN p_username varchar(255), IN p_saldo decimal(10, 2))
+BEGIN
+    DECLARE next_number INT;
+    DECLARE next_iban VARCHAR(20);
+
+    -- Obtener el último IBAN insertado, si existe
+    SELECT SUBSTRING(IBAN, 6) INTO next_number FROM Bank.accounts ORDER BY IBAN DESC LIMIT 1;
+
+    -- Generar el próximo IBAN
+    IF next_number IS NOT NULL THEN
+        SET next_number = next_number + 1;
+        SET next_iban = CONCAT('ES-', LPAD(next_number, 6, '0'));
+    ELSE
+        SET next_iban = 'ES-000001'; -- Si no hay registros, empezamos desde 1
+    END IF;
+
+    -- Insertar el nuevo registro
+    INSERT INTO Bank.accounts (IBAN, username, balance) VALUES (next_iban, p_username, p_saldo);
+
+    SELECT CONCAT('Nuevo registro insertado con IBAN: ', next_iban) AS message;
+END;
+
+LOS INSERT:
+INSERT INTO users (username, name, surname, mail, password, admin) VALUES
+                                                                       ('laura_g', 'Laura', 'García', 'laura.garcia@example.com', 'contrasena123', 0),
+                                                                       ('david_m', 'David', 'Martínez', 'david.martinez@example.com', 'contrasena123', 0),
+                                                                       ('carmen_r', 'Carmen', 'Rodríguez', 'carmen.rodriguez@example.com', 'contrasena123', 1);
+CALL insert_account('laura_g', 2000.00);
+CALL insert_account('david_m', 2500.50);
+CALL insert_account('carmen_r', 3000.75);
+INSERT INTO transactions (source_IBAN, destination_IBAN, amount, description) VALUES
+                                                                                  ('ES-000001', 'ES-000002', 150.00, 'Pago de alquiler'),
+                                                                                  ('ES-000002', 'ES-000003', 45.75, 'Cena con amigos');]]></console>
+    </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
@@ -11,8 +102,102 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
   <component name="DBNavigator.Project.Settings">
-    <connections />
+    <connections>
+      <connection id="061b050b-f522-45f4-a762-0d158651197c" active="true" signed="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="MYSQL" />
+          <config-type value="BASIC" />
+          <database-version value="8.0" />
+          <driver-source value="BUNDLED" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="192.168.56.101" />
+          <port value="3306" />
+          <database value="Bank" />
+          <tns-folder value="" />
+          <tns-profile value="" />
+          <type value="USER_PASSWORD" />
+          <user value="admin00" />
+          <deprecated-pwd value="YWx1bW5v" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="30" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter>
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+    </connections>
     <browser-settings>
       <general>
         <display-mode value="TABBED" />
@@ -410,5 +595,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>

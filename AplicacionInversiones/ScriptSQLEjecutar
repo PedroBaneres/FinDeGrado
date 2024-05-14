@@ -1,4 +1,6 @@
+drop database Bank;
 create database if not exists Bank;
+use Bank;
 create table users
 (
     username      varchar(50)                          not null
@@ -45,14 +47,14 @@ create table transactions
 create index destination_IBAN
     on transactions (destination_IBAN);
 
-create
-    definer = admin00@`%` procedure insert_account(IN p_username varchar(255), IN p_saldo decimal(10, 2))
+DELIMITER //
+CREATE PROCEDURE insert_account(IN p_username VARCHAR(255), IN p_saldo DECIMAL(10, 2))
 BEGIN
     DECLARE next_number INT;
     DECLARE next_iban VARCHAR(20);
 
     -- Obtener el último IBAN insertado, si existe
-    SELECT SUBSTRING(IBAN, 6) INTO next_number FROM Bank.accounts ORDER BY IBAN DESC LIMIT 1;
+    SELECT SUBSTRING(IBAN, 4) INTO next_number FROM Bank.accounts ORDER BY IBAN DESC LIMIT 1;
 
     -- Generar el próximo IBAN
     IF next_number IS NOT NULL THEN
@@ -66,9 +68,11 @@ BEGIN
     INSERT INTO Bank.accounts (IBAN, username, balance) VALUES (next_iban, p_username, p_saldo);
 
     SELECT CONCAT('Nuevo registro insertado con IBAN: ', next_iban) AS message;
-END;
+END //
+DELIMITER ;
 
-LOS INSERT:
+
+
 INSERT INTO users (username, name, surname, mail, password, admin) VALUES
                                                                        ('laura_g', 'Laura', 'García', 'laura.garcia@example.com', 'contrasena123', 0),
                                                                        ('david_m', 'David', 'Martínez', 'david.martinez@example.com', 'contrasena123', 0),

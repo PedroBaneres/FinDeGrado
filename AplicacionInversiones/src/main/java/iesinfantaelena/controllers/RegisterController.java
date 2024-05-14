@@ -69,11 +69,13 @@ public class RegisterController {
             callableStatement.setDouble(2, 0);
 
             callableStatement.execute();
-            connection.close();
+
 
             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-            masterController.logOut();
-        } catch (SQLException | IOException e) {
+            connection.commit();
+            //masterController.logOut();
+
+        } catch (SQLException e) {
             masterController.showError("Error al registrar el usuario. Compruebe que los campos han sido rellenados correctamente");
             throw new DatabaseConnectionException("Error al conectar con la BBDD.");
         }
