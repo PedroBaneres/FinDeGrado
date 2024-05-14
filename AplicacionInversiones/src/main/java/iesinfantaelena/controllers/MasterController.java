@@ -101,7 +101,7 @@ public class MasterController {
         }
     }
 
-        public boolean verifyPassword(String username, String password) throws DatabaseConnectionException, UserNotFoundException {
+    public boolean verifyPassword(String username, String password) throws DatabaseConnectionException, UserNotFoundException {
             try (Connection connection = getDatabaseConnection();
                  PreparedStatement statement = connection.prepareStatement("SELECT password FROM users WHERE username = ?")) {
 
@@ -119,14 +119,16 @@ public class MasterController {
                 logSevere(e);
                 throw new DatabaseConnectionException("Error al conectar con la base de datos durante la verificación de contraseña", e);
             }
-        }
-
+    }
         public void logIn(String username) throws IOException, ServerException, UserNotFoundException, DatabaseConnectionException, SQLException {
-        activeUser = getClientFromDatabase(username);
-        assert activeUser != null;
-        if (activeUser.isAdmin()){
-        logAsAdmin();} else {logAsClient();}
-}
+            activeUser = getClientFromDatabase(username);
+            assert activeUser != null;
+            if (activeUser.isAdmin()) {
+                logAsAdmin();
+            } else {
+                logAsClient();
+            }
+        }
     public User getClientFromDatabase(String username) throws UserNotFoundException, DatabaseConnectionException {
         try {
             Connection connection = getDatabaseConnection();

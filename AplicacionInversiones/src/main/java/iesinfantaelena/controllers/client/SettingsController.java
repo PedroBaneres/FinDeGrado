@@ -68,7 +68,7 @@ public class SettingsController {
     }
     @FXML
     private void handleChangeRequest(ActionEvent event) throws UserNotFoundException, DatabaseConnectionException {
-        // Identifica el botón que fue presionado
+   
         Button sourceButton = (Button) event.getSource();
         String buttonId = sourceButton.getId();
         String username = masterController.activeUser.getUsername();

@@ -66,16 +66,16 @@ public class HomepageController {
 
     private void populateLastWeekChart() {
         try {
-            // Get database connection
+
             Connection connection = masterController.getDatabaseConnection();
 
-            // Get username of the logged-in user
+
             String username = masterController.activeUser.getUsername();
 
-            // Get account balance data for the last week
+
             XYChart.Series<String, Number> series = chartManager.getAccountBalanceDataLastWeek(connection, username);
 
-            // Add the series to the chart
+
             weekLineChart.getData().add(series);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,16 +83,16 @@ public class HomepageController {
     }
     private void populateAllTimeChart() {
         try {
-            // Get database connection
+
             Connection connection = masterController.getDatabaseConnection();
 
-            // Get username of the logged-in user
+
             String username = masterController.activeUser.getUsername();
 
-            // Get account balance data for all time
+
             XYChart.Series<String, Number> series = chartManager.getAccountBalanceDataAllTime(connection, username);
 
-            // Add the series to the chart
+
             allLineChart.getData().add(series);
         } catch (SQLException e) {
             e.printStackTrace();
